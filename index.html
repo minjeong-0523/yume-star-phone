@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f59dcf" />
+  <title>YUME STAR PHONE — 니지노 유메의 반짝이는 휴대폰</title>
+  <style>
+    :root{--pink:#fa65bd;--hot:#fa369f;--rose:#ffadd8;--gold:#f7c943;--dark:#292631;--sky:#a3eafd;--ink:#5d426b;--shadow:0 26px 70px rgba(139,57,111,.21)}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:"Trebuchet MS","Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--ink)}
+    body{background:radial-gradient(circle at 14% 14%,#fff7fb 0 8%,transparent 29%),radial-gradient(circle at 85% 8%,#fff5bd 0 0%,transparent 25%),linear-gradient(140deg,#fff4fc,#f9e8fb 44%,#e7f7ff 100%);overflow-x:hidden}
+    .world{position:relative;min-height:100dvh;display:grid;grid-template-columns:minmax(270px,1fr) minmax(390px,1.1fr);align-items:center;max-width:1200px;margin:auto;padding:28px 42px;gap:22px;isolation:isolate}
+    .bg-star{pointer-events:none;position:fixed;color:#ffbfdd;opacity:.62;filter:drop-shadow(0 2px #fff);font-size:32px;animation:twinkle 5s ease-in-out infinite;z-index:-1}.bg-star:nth-of-type(2){left:6%;top:65%;font-size:48px;animation-delay:-2s}.bg-star:nth-of-type(3){left:77%;top:15%;font-size:52px;color:#ffe897;animation-delay:-1s}.bg-star:nth-of-type(4){left:90%;top:77%;color:#e8adfc;animation-delay:-3s}
+    .intro{padding:20px 10px 20px 0;max-width:490px}.eyebrow{font-size:11px;font-weight:900;letter-spacing:.25em;color:#c55c9e;background:#fff9ff;border:1px solid #f6cce5;border-radius:100px;display:inline-flex;align-items:center;gap:7px;padding:9px 15px;box-shadow:0 5px 18px #f8badd55}.intro h1{font-size:clamp(44px,5vw,74px);line-height:1.04;letter-spacing:-.045em;margin:23px 0 13px;color:#f54cae;text-shadow:3px 3px 0 #fff,5px 6px 0 #ffd5e9}.intro h1 span{display:block;color:#ba70bf}.intro p{font-size:15px;line-height:1.9;max-width:440px;word-break:keep-all}.intro .accent{font-weight:900;color:#e34e9f}.usage{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0}.usage button{border:1.5px solid #ffc7e9;background:#fff;box-shadow:0 4px 0 #f4c0dd,0 7px 20px #edb5d544;color:#b4538c;font-weight:800;font-size:12px;padding:11px 13px;border-radius:18px;cursor:pointer;transition:transform .17s,box-shadow .17s}.usage button:hover{transform:translateY(-2px);box-shadow:0 6px 0 #f4c0dd,0 9px 20px #edb5d544}.usage button:active{transform:translateY(3px);box-shadow:0 1px 0 #f4c0dd}.aside-note{padding:14px 17px;background:#ffffffa8;line-height:1.7;border:1px solid white;border-radius:19px;font-size:12px;color:#947c93;max-width:435px}
+    .device-zone{display:flex;align-items:center;justify-content:center;position:relative;min-height:720px;perspective:1200px}.orbit{position:absolute;width:min(630px,100%);height:620px;border-radius:50%;background:radial-gradient(ellipse,#ffdcf3 0%,#ffeefd 40%,transparent 70%);filter:blur(4px);z-index:-1}.device-shadow{position:absolute;width:330px;height:50px;bottom:4px;background:#b56c9244;filter:blur(25px);border-radius:50%;z-index:-1}
+    .device{--w:min(367px,calc(100vw - 25px),calc((100dvh - 30px)*.548));width:var(--w);aspect-ratio:.548;position:relative;flex:none;border-radius:32px;background:linear-gradient(137deg,#fff3a7 0%,#fbc735 10%,#f9b558 29%,#d88c26 52%,#fff7ae 80%,#e4a438 100%);border:4px solid #9e6428;box-shadow:inset 2px 2px 1px #fffbd4,inset -2px -2px 1px #b96f23,13px 16px 0 #d65c9e,19px 23px 0 #e9a2c1,var(--shadow);transform:rotate(2deg);transition:transform .4s ease}
+    .device:hover{transform:rotate(0)}
+    .device::before{content:"";position:absolute;inset:6px;border:2px dotted #fff3aa;border-radius:26px;pointer-events:none;z-index:5;opacity:.8}
+    .device-inner{position:absolute;inset:13px 13px 16px;border-radius:22px;background:repeating-linear-gradient(45deg,#ffffff24 0 15px,transparent 15px 32px),repeating-linear-gradient(-45deg,#fbaedc67 0 14px,#f47dbe50 14px 32px),linear-gradient(145deg,#ffb4df,#e862ad);border:3px solid #fae596;box-shadow:inset 0 0 6px 3px #fff5d0,inset 0 0 30px #fff8}
+    .device-inner::before{content:"";position:absolute;inset:5px;border:2px solid #ffffff70;border-radius:18px;pointer-events:none}
+    .corner{position:absolute;width:43px;height:43px;z-index:6;background:radial-gradient(circle at 30% 30%,#fffbc2 0,#ffdc5a 22%,#db9632 55%,transparent 72%);filter:drop-shadow(0 1px 1px #c68c22)}.corner.tl{left:0;top:0}.corner.tr{right:0;top:0;transform:scaleX(-1)}.corner.bl{left:0;bottom:0;transform:scaleY(-1)}.corner.br{right:0;bottom:0;transform:scale(-1)}
+    .corner::after{content:"✦";font-size:20px;color:#fff5ad;position:absolute;top:4px;left:6px}
+    .shell-glints{position:absolute;inset:0;pointer-events:none;z-index:7}.shell-glints span{position:absolute;color:#fffdc8;text-shadow:0 0 7px white;font-size:12px}.shell-glints span:nth-child(1){left:13px;top:17%}.shell-glints span:nth-child(2){right:13px;top:35%}.shell-glints span:nth-child(3){left:16px;bottom:23%}.shell-glints span:nth-child(4){right:18px;bottom:9%}
+    .faceplate{position:absolute;inset:19px 24px 25px;display:grid;grid-template-rows:85px minmax(0,1fr) 108px;background:linear-gradient(#29262d,#27232b);clip-path:polygon(5% 0,95% 0,100% 4%,100% 96%,95% 100%,5% 100%,0 96%,0 4%);padding:0 6px 5px;filter:drop-shadow(0 3px 1px #5a3346);z-index:3}
+    .crest{position:relative;display:flex;align-items:center;justify-content:center;gap:9px;color:#f8ce54}.crest .sm-star{font-size:22px;line-height:1;text-shadow:0 0 3px #fcea9b}.crest .sm-star.small{font-size:13px}.crown-svg{width:78px;height:64px;filter:drop-shadow(0 0 1px #fff3aa)}
+    .display{margin:0 3px;position:relative;min-height:0;overflow:hidden;border:3px solid #ffe7ad;box-shadow:0 0 0 2px #5d3852,0 2px 6px #0a090f;display:flex;flex-direction:column;background:var(--sky);border-radius:2px}
+    .statusbar{height:26px;flex-shrink:0;background:linear-gradient(#ff259a,#e82c8d);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:space-between;padding:0 8px;gap:7px;font-weight:900;letter-spacing:.06em;text-shadow:0 1px #c91771}.statusbar .status-right{white-space:nowrap;display:flex;align-items:center;gap:6px;font-size:10px}.battery{width:19px;height:10px;border:1.5px solid #fff;display:inline-flex;align-items:center;padding:1px;border-radius:1px;position:relative}.battery::after{content:"";position:absolute;right:-4px;width:2px;height:5px;background:#fff}.battery b{width:70%;height:100%;background:#b9f4ff;display:block}
+    #appView{flex:1;min-height:0;overflow:hidden;position:relative;display:flex;flex-direction:column;background:#b1efff}
+    .chin{position:relative;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;color:#fbd76d;padding-top:6px;min-height:0}.chin-decor{position:absolute;font-size:15px;top:22px;letter-spacing:15px;color:#f5d15b}.chin-decor.left{left:4px;transform:rotate(-50deg)}.chin-decor.right{right:-8px;transform:rotate(50deg)}.home-gem{position:relative;z-index:3;display:flex;justify-content:center;align-items:center;width:70px;height:70px;border:0;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff7ae,#d5a32a 65%,#956121 85%);box-shadow:0 0 0 2px #ffebb0,0 2px 3px #100b0d,0 0 12px #f8cb5266;cursor:pointer;padding:6px;transition:transform .2s}.home-gem:hover{transform:scale(1.07)}.home-gem:active{transform:scale(.93)}.gem-inside{width:51px;height:51px;display:grid;place-items:center;border-radius:50%;border:3px solid #fbe596;background:radial-gradient(circle at 35% 18%,#ffd8f7,#fc62b8 44%,#d82894 70%,#991665);box-shadow:inset 0 0 3px 3px #fff5,0 0 3px #fff}.gem-inside svg{width:35px;height:35px;filter:drop-shadow(0 0 2px #fff)}
+    .bow{position:absolute;width:192px;height:61px;bottom:0;opacity:.98;pointer-events:none}.chin-stars{position:absolute;width:100%;bottom:5px;display:flex;justify-content:space-around;font-size:18px;color:#f8d05e;pointer-events:none}
+    button,input,textarea{font:inherit}button{touch-action:manipulation}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #fbd54c;outline-offset:2px}
+    .app-header{height:36px;flex-shrink:0;display:flex;align-items:center;gap:6px;padding:0 8px;background:linear-gradient(100deg,#fff5fe,#fdd0ef);border-bottom:2px solid #f8acdb;color:#c54b9a;font-weight:900;font-size:13px;text-align:center}.back-btn{border:1px solid #ef9ecb;background:white;padding:5px 9px;border-radius:12px;color:#d34e9d;font-size:11px;font-weight:900;cursor:pointer;box-shadow:0 2px 0 #f7afd9}.app-header .h-title{flex:1;margin-right:37px;text-shadow:0 1px white}.app-scroll{overflow-y:auto;overflow-x:hidden;min-height:0;flex:1;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#fac7ec transparent}.pill{display:inline-block;border:1px solid #f0addd;color:#a85a91;background:#fff5fc;padding:4px 8px;border-radius:20px;font-size:10px;font-weight:800}.subline{color:#ae7a9a;font-size:10px}
+    /* HOME: sky-blue background and prominent gold/pink five-point stars */
+    .home-scene{position:relative;width:100%;height:100%;overflow:hidden;background:radial-gradient(circle at 28% 32%,#f2ffff 0%,transparent 28%),linear-gradient(165deg,#baf6ff,#9de6fa 53%,#c4f4ff);background-size:cover}.home-scene::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,#fff 0 1.5px,transparent 2px),radial-gradient(circle,#fff9 0 1px,transparent 2px);background-size:31px 37px,47px 58px;background-position:4px 8px,19px 28px;opacity:.93;animation:skyShift 8s linear infinite}
+    .home-script{position:absolute;left:14px;top:8px;font-size:11px;line-height:1.3;color:#dd55a8;font-weight:900;text-shadow:1px 1px #fff,0 0 5px #fff;letter-spacing:.06em}.home-script small{display:block;color:#a98cb3;font-size:9px;letter-spacing:.15em}
+    .star-field{position:absolute;inset:34px 0 auto;height:188px}.twinkle{position:absolute;color:#fff9ce;text-shadow:0 0 4px #fff,0 0 8px #f8c342;animation:twinkle 3.3s ease-in-out infinite alternate}.twinkle:nth-child(1){top:12px;left:23px;font-size:17px}.twinkle:nth-child(2){top:110px;left:27px;font-size:27px;animation-delay:-1s}.twinkle:nth-child(3){top:37px;right:17px;font-size:14px}.twinkle:nth-child(4){top:129px;right:40px;font-size:19px;animation-delay:-1.5s}
+    .origami{position:absolute;left:24px;top:8px;width:142px;height:142px;filter:drop-shadow(0 3px 2px #b58b26) drop-shadow(0 0 3px #fff);transform:rotate(-12deg);animation:float 5s ease-in-out infinite}.origami svg{width:100%;height:100%}.mini-gold-star{position:absolute;left:22px;top:116px;font-size:45px;filter:drop-shadow(1px 2px #d0a23c);color:#ffdb50;transform:rotate(-11deg)}
+    .fancy-star{position:absolute;right:18px;top:83px;width:136px;height:133px;filter:drop-shadow(0 4px 2px #cd7a9c);transform:rotate(13deg);animation:float 5.5s ease-in-out -1.6s infinite}.fancy-star svg{width:100%;height:100%}.little-star{position:absolute;right:53px;top:15px;font-size:39px;color:#ffdf64;text-shadow:0 3px #c7a041,0 0 3px white}
+    .home-notice{position:absolute;bottom:99px;left:12px;right:12px;cursor:pointer;background:linear-gradient(115deg,#ffcced,#f5a7df);border:2px solid white;border-radius:16px;box-shadow:0 4px 0 #e78dcb,0 7px 15px #c76aa667;padding:10px 30px 10px 11px;display:flex;gap:9px;align-items:center;color:#ad347e;text-align:left}.home-notice strong{font-size:11px;line-height:1.5}.home-notice small{font-size:9px;display:block;color:#b46e9c}.home-notice .envelope{font-size:26px}.home-notice .chev{position:absolute;right:8px;font-size:18px;color:#c14e90}.home-notice:hover{filter:brightness(1.035)}
+    .home-apps{position:absolute;bottom:12px;left:9px;right:9px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.home-launcher{display:flex;flex-direction:column;align-items:center;gap:3px;border:0;background:transparent;cursor:pointer;padding:2px 0;color:#b7589d;font-size:9px;font-weight:900;text-shadow:1px 1px white}.icon-tile{width:47px;height:47px;display:grid;place-items:center;border:3px solid #fff6fb;border-radius:14px;background:linear-gradient(145deg,#ffe4fb,#ffa2d9 46%,#f7c1ed);box-shadow:0 3px 0 #e78ccc,inset 0 0 0 2px #f5a2dc}.icon-tile svg{width:28px;height:28px;color:#b9339c;fill:none;stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px #fff)}.home-launcher:hover .icon-tile{transform:translateY(-2px);background:linear-gradient(145deg,#ffefad,#ffb6e1)}
+    /* MESSAGES */
+    .messages-bg{background:linear-gradient(180deg,#ddf8ff,#fff4fb);display:flex;flex-direction:column;height:100%;min-height:0}.list-heading{padding:11px 11px 8px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:900;color:#ba63aa}.thread-row{display:flex;gap:10px;align-items:center;padding:12px 10px;border:0;border-bottom:1px solid #f4cce8;background:#ffffffb7;text-align:left;width:100%;cursor:pointer}.thread-row:hover{background:#fff2fb}.avatar{width:40px;height:40px;flex:none;border-radius:13px;display:grid;place-items:center;font-size:23px;color:#fff;border:2px solid white;box-shadow:0 2px 0 #e1abd0}.av-rola{background:linear-gradient(145deg,#9f84e9,#eaa2d8)}.av-koharu{background:linear-gradient(145deg,#ffc061,#f59cc8)}.av-ako{background:linear-gradient(145deg,#90d8ee,#b5b2ec)}.av-yume{background:linear-gradient(145deg,#f777b5,#ffc8e3)}.thread-text{min-width:0;flex:1}.thread-text strong{font-size:12px;color:#986083}.thread-text p{font-size:10px;color:#ab86a5;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;margin:3px 0 0}.thread-time{font-size:9px;color:#b98baa;align-self:flex-start}.unread-dot{width:15px;height:15px;background:#fc4ca0;color:white;border-radius:50%;display:grid;place-items:center;font-size:9px;margin-top:6px}.chat-bg{display:flex;flex-direction:column;background:linear-gradient(150deg,#e4faff,#f3edff);height:100%;min-height:0}.chat-contact{text-align:center;font-size:10px;color:#b490ae;padding:5px;background:#fff7fcaf}.bubble-list{flex:1;overflow-y:auto;min-height:0;padding:8px 8px 14px;display:flex;flex-direction:column;gap:8px}.bubble-row{display:flex;gap:5px;align-items:end}.bubble-row.mine{justify-content:end}.bubble{font-size:11px;line-height:1.6;max-width:80%;padding:9px 10px;border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 2px 0 #dfc2dc}.bubble-row.them .bubble{background:white;border-radius:4px 14px 14px 14px;color:#896b91}.bubble-row.mine .bubble{background:#ffaada;border-radius:14px 4px 14px 14px;color:#9a3c77}.bubble-row time{font-size:8px;color:#b395b6}.chat-form{display:flex;flex:none;gap:5px;padding:8px;background:#fff8fd;border-top:1px solid #f6bcdc}.chat-form input{width:0;flex:1;min-width:0;padding:9px 8px;background:#fff;border:1.5px solid #f3b9e0;border-radius:12px;font-size:11px;outline:0}.chat-form button,.pink-action{background:linear-gradient(#ff88c9,#e95caa);border:1px solid #d54595;color:white;border-radius:10px;font-size:10px;font-weight:900;padding:8px 10px;cursor:pointer;box-shadow:0 2px 0 #c84a8c}
+    /* MESSAGE APP — letter-style mail from the reference, separate from Kirakirain SNS */
+    .letter-ui{height:100%;min-height:0;display:flex;flex-direction:column;overflow:hidden;background:radial-gradient(circle at 95% 19%,#fff9f8 0 3px,transparent 4px),radial-gradient(circle at 4% 64%,#fff9f8 0 3px,transparent 4px),linear-gradient(160deg,#ffe4f5,#f7c9eb 47%,#eec7f7)}
+    .letter-topbar{height:38px;min-height:38px;display:flex;align-items:center;gap:7px;padding:0 8px;background:linear-gradient(#ff75c7,#ed3ba2 52%,#db258a);border-bottom:2px solid #ffceeb;color:white;text-shadow:0 1px #ba397e;box-shadow:0 2px 4px #a5498245}
+    .letter-topbar strong{flex:1;text-align:center;font-size:13px;letter-spacing:.055em;white-space:nowrap}.letter-topbar button{min-width:29px;height:26px;padding:0 6px;display:grid;place-items:center;border:1.5px solid #fff9;border-radius:7px;color:#fff;background:#ffffff30;font-size:15px;font-weight:900;cursor:pointer}.letter-topbar button:hover{background:#fff5}.letter-topbar .letter-title-mark{font-size:15px;filter:drop-shadow(0 1px #fff5)}
+    .letter-scroll{flex:1;min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#ec82bd transparent;padding:9px 9px 7px}
+    .letter-paper{position:relative;min-height:calc(100% - 16px);padding:12px 10px 10px;display:flex;flex-direction:column;border:2px solid #fff;border-radius:3px;background:radial-gradient(circle at 10% 10%,#fff7fc 0 5px,transparent 6px),linear-gradient(#fffafd,#fffdfd 45%,#fff6fd);box-shadow:0 0 0 1px #ed93cc,0 3px 0 #df8cbe,0 5px 10px #bd7baf44;overflow:hidden}
+    .letter-paper::before{content:'✦ ✧ ✦';position:absolute;top:7px;right:9px;color:#f5bde4;font-size:12px;letter-spacing:4px}.letter-paper::after{content:'✧ ❀ ✧';position:absolute;bottom:7px;right:12px;color:#eec0de;font-size:10px;letter-spacing:6px;pointer-events:none}
+    .letter-filigree{height:14px;margin:-4px 0 4px;color:#e9a1cc;font-size:12px;font-weight:900;letter-spacing:.16em;white-space:nowrap;overflow:hidden}
+    .letter-field{display:grid;grid-template-columns:56px minmax(0,1fr);align-items:center;gap:7px;padding:7px 0 8px;border-bottom:2px dotted #efa4d4;min-height:44px}
+    .letter-label{background:linear-gradient(#ffb5e4,#f27abe);border:1px solid #f9c9e9;border-radius:6px;padding:5px 3px;color:white;font-family:Georgia,'Trebuchet MS',sans-serif;font-weight:bold;font-size:14px;text-align:center;text-shadow:0 1px #db4f9d;box-shadow:0 1px 0 #e8a1cc}.letter-label small{display:block;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:8px;font-weight:700;letter-spacing:0}
+    .letter-value{min-width:0;font-size:11px;font-weight:900;color:#b34d8c;line-height:1.35;overflow-wrap:anywhere}.letter-value span{display:block;font-size:9px;font-weight:500;color:#c08eab;margin-top:1px}
+    .letter-message-heading{display:flex;justify-content:space-between;align-items:center;padding-top:9px}.letter-message-heading .letter-label{width:85px}.letter-message-heading .star-line{color:#efaacb;letter-spacing:.1em;font-size:12px}.letter-message-text{flex:1;min-height:64px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;margin:12px 6px 5px;font-size:12px;font-weight:800;color:#a44983}.letter-fancy-footer{position:relative;margin-top:auto;padding:1px 0 0;text-align:center;color:#e9a1cf;font-size:14px;letter-spacing:3px}.letter-date{position:relative;z-index:1;text-align:right;font-size:9px;color:#bd87a8;padding-right:3px;margin-top:2px}
+    .letter-actions{min-height:45px;display:grid;grid-template-columns:1fr 1.18fr;gap:7px;padding:7px 9px 9px;background:linear-gradient(#ffeaf8,#fcd0ed);border-top:2px solid #f2a4d6}.letter-actions button,.letter-compose-send{border:1.5px solid #f1b3d7;border-radius:10px;padding:7px 4px;color:#b65091;background:linear-gradient(#fffdfd,#ffe2f3);box-shadow:0 2px 0 #e89cc7;cursor:pointer;font-size:11px;font-weight:900}.letter-actions button.pink,.letter-compose-send{background:linear-gradient(#ff91d1,#ef52a9);color:#fff;border-color:#e352a1;text-shadow:0 1px #d43c93}.letter-actions button:active,.letter-compose-send:active{transform:translateY(2px);box-shadow:0 0 0 #e89cc7}
+    .letter-inbox-tabs{flex:none;display:flex;gap:6px;padding:8px 9px 7px;background:#fff5fc99}.letter-inbox-tabs button{flex:1;background:#fff;border:1px solid #f3b5dd;border-radius:8px;color:#b9619a;font-size:10px;font-weight:900;padding:7px 3px;cursor:pointer}.letter-inbox-tabs button.selected{background:linear-gradient(#ff8ccb,#ed5eac);border-color:#e95dad;color:#fff}.letter-inbox-head{color:#b25c9c;font-size:11px;font-weight:900;margin:2px 0 9px;text-align:center}
+    .letter-list{display:flex;flex-direction:column;gap:7px}.letter-item{width:100%;padding:9px 10px;text-align:left;border:2px solid #fff;background:linear-gradient(110deg,#fffbff,#fff0fa);box-shadow:0 2px 0 #eab3d4;border-radius:10px;display:flex;align-items:center;gap:8px;color:#985b85;cursor:pointer}.letter-item:hover{background:#fff}.letter-item .mail-seal{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#ffcee9;font-size:19px;border:1px solid #ffaddb}.letter-item .mail-copy{flex:1;min-width:0}.letter-item strong{display:block;font-size:11px;color:#b24791}.letter-item small{display:block;color:#b88ba8;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.letter-item time{align-self:start;font-size:8px;white-space:nowrap;color:#bd94ad}.letter-empty{text-align:center;font-size:12px;line-height:1.8;color:#ba8ca6;padding:20px 10px}
+    .letter-compose-paper{position:relative;padding:12px 10px;min-height:calc(100% - 16px);border:2px solid white;background:linear-gradient(#fffaff,#fffdfd);box-shadow:0 0 0 1px #ed93cc,0 3px 0 #df8cbe;display:flex;flex-direction:column;gap:8px}.letter-compose-paper label{display:grid;grid-template-columns:55px minmax(0,1fr);gap:7px;align-items:center;color:#a54b88}.letter-compose-paper label .letter-label{width:55px}.letter-compose-paper select,.letter-compose-paper input,.letter-compose-paper textarea{width:100%;min-width:0;border:1px solid #f1b6dd;background:#fff9fe;color:#955b85;border-radius:7px;padding:8px 7px;font-size:11px;font-weight:800;outline-color:#f5b1db}.letter-compose-paper input[readonly]{background:#fff2f9;color:#bc85a9}.letter-compose-paper textarea{min-height:120px;flex:1;resize:vertical;line-height:1.6;font-weight:600}.letter-compose-paper .letter-body-label{display:flex;gap:6px;align-items:center;margin:4px 0 0;color:#c47dac;font-size:10px}.letter-compose-paper .letter-body-label .letter-label{width:88px}.letter-compose-paper .mail-input-heading{color:#d17cab;font-weight:900;letter-spacing:.08em;font-size:10px;text-align:center}
+    .icon-tile{position:relative}.app-unread-badge{position:absolute;right:-8px;top:-8px;min-width:18px;height:18px;padding:0 3px;display:grid;place-items:center;border-radius:10px;border:2px solid #fff4fd;background:#f9419e;color:white;font-size:9px;line-height:1;box-shadow:0 2px 3px #b84f9566;text-shadow:none}
+    .letter-inbox-head{display:flex;justify-content:space-between;align-items:center;gap:5px;text-align:left}.letter-inbox-head button{border:1px solid #f4b0d9;background:#fff;color:#c65299;font-size:9px;font-weight:900;border-radius:12px;padding:6px 7px;cursor:pointer;box-shadow:0 1px 0 #eba3cc}.letter-item.mail-unread{background:linear-gradient(110deg,#fffafd,#ffe0f2);border-color:#ffe8fa}.letter-item.mail-unread .mail-copy strong{color:#e843a0}.letter-item .new-mail-mark{font-style:normal;background:#ed56a6;color:white;border-radius:5px;font-size:8px;padding:2px 4px;margin-left:3px}.letter-item .mail-seal{font-size:20px}
+
+    /* Stitch D-Mail detail: pink subnav, cyan dotted LCD, From / Title / content. */
+    .letter-ui.is-detail{background-color:#8bdff8;background-image:radial-gradient(circle,#fff9 23%,transparent 26%),linear-gradient(180deg,#92e4fb,#70d4f4);background-size:15px 15px,100% 100%}
+    .letter-ui.is-detail .letter-topbar{flex-shrink:0}
+    .mail-ref-scroll{padding:8px 9px 12px;display:flex;flex-direction:column;gap:9px}
+    .mail-ref-subnav{display:flex;align-items:center;justify-content:space-between;gap:5px;flex:none}
+    .mail-ref-back{border:2px solid #fff;border-radius:999px;padding:5px 10px;background:linear-gradient(100deg,#2db9f6,#068bd2);box-shadow:0 2px 5px #0878aa55;color:#fff;font-size:10px;line-height:1.1;font-weight:900;cursor:pointer;white-space:nowrap}
+    .mail-ref-state{font-size:9px;font-weight:900;color:#dd488e;background:#fffbffed;border:1px solid #f8b8de;border-radius:999px;padding:5px 8px;white-space:nowrap;max-width:70%;overflow:hidden;text-overflow:ellipsis}
+    .mail-ref-state::before{content:'●';color:#f45fa5;margin-right:4px;font-size:8px}
+    .mail-ref-card{border:2px solid #ff83b9;border-radius:15px;box-shadow:0 5px 13px #dd5c9840;background:#fff;overflow:hidden;flex:none;display:flex;flex-direction:column}
+    .mail-ref-meta{background:linear-gradient(180deg,#fff1f8,#fffdfd);padding:12px 10px 11px;display:grid;gap:10px;border-bottom:1px solid #fad2e7}
+    .mail-ref-row{display:flex;align-items:center;gap:9px;min-width:0}
+    .mail-ref-label{display:inline-block;flex:none;color:#fff;font-size:10px;font-weight:900;border-radius:999px;padding:4px 10px;min-width:46px;text-align:center;background:linear-gradient(110deg,#ff68aa,#ea2e86);text-shadow:0 1px #c52e75;box-shadow:0 1px 3px #e93d8666}
+    .mail-ref-label.title{background:linear-gradient(110deg,#c981d9,#9743be);text-shadow:0 1px #8730a6;box-shadow:0 1px 3px #a258b866}
+    .mail-ref-person{min-width:0;display:flex;flex-direction:column;gap:1px}
+    .mail-ref-person strong{font-size:12px;line-height:1.35;color:#d7297e;white-space:normal;overflow-wrap:anywhere}
+    .mail-ref-person small{font-size:9px;line-height:1.2;color:#ad8fa3}
+    .mail-ref-title{font-size:11px;font-weight:900;color:#833a9a;line-height:1.45;overflow-wrap:anywhere}
+    .mail-ref-body{min-height:170px;padding:16px 12px 12px;position:relative;background:linear-gradient(180deg,#fff,#fff9fd 55%,#ffedf6);display:flex;flex-direction:column;gap:9px}
+    .mail-ref-body::after{content:'★ ✦';position:absolute;bottom:24px;right:13px;color:#f9c3e2;opacity:.53;font-size:36px;letter-spacing:0;transform:rotate(-18deg);pointer-events:none}
+    .mail-ref-divider{height:1px;width:100%;background:linear-gradient(90deg,transparent,#f2a4d0,transparent);margin-bottom:2px}
+    .mail-ref-message{font-size:12px;line-height:1.8;font-weight:800;white-space:pre-wrap;overflow-wrap:anywhere;position:relative;z-index:1;color:#8c3475;margin:0;flex:1}
+    .mail-ref-message::first-line{color:#b82878}
+    .mail-ref-date{text-align:right;font-size:9px;color:#c17eaa;font-weight:800;position:relative;z-index:1;margin-top:10px}
+    .mail-ref-actions{flex:none;display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid #f8bfdb;background:#fce3ee;padding:7px 9px}
+    .mail-ref-stamp{color:#df5996;font-size:10px;font-weight:900;letter-spacing:.025em}
+    .mail-ref-buttons{display:flex;gap:7px}.mail-ref-buttons button{width:31px;height:29px;display:grid;place-items:center;border:1px solid #f4a4cc;border-radius:8px;background:#fff;color:#d24494;cursor:pointer;box-shadow:0 1px 2px #de7ca66b}
+    .mail-ref-buttons button:hover{background:#fff0f9}.mail-ref-buttons svg{width:17px;height:17px;fill:currentColor}
+    .letter-list-subject{display:block;color:#9c5394;font-size:10px;font-weight:900;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px}
+    .letter-list-excerpt{display:block;color:#b88ba8;font-size:9px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+    .letter-compose-paper .mail-ref-compose-title{flex:none}
+    .letter-compose-paper .mail-ref-compose-title .letter-label{font-size:12px}
+    /* PHONE */
+    .dial-bg{min-height:0;flex:1;display:flex;flex-direction:column;background:linear-gradient(155deg,#d4f7ff,#fdf0fa)}.mode-tabs{display:flex;flex:none;gap:5px;padding:7px;background:#fff6fd}.mode-tabs button{flex:1;border:1px solid #f1b5dd;border-radius:12px;background:#fff;color:#bf7ca5;font-size:11px;font-weight:900;padding:7px;cursor:pointer}.mode-tabs .selected{background:#ed70b2;color:white;border-color:#ed70b2}.dial-number{font-size:23px;color:#984d8a;font-weight:900;text-align:center;letter-spacing:.08em;min-height:45px;display:grid;place-items:center;margin:6px 5px 1px;overflow:hidden}.dial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px 23px 5px;flex:1}.dial-key{border:1px solid #eeb3d9;border-radius:14px;background:linear-gradient(#fff,#ffeaf8);color:#b1539a;font-size:21px;font-weight:900;cursor:pointer;box-shadow:0 2px 0 #e9b9d8;display:grid;place-items:center;min-height:31px}.dial-key:active{background:#ffd5ee;transform:translateY(2px)}.dial-actions{display:flex;gap:8px;align-items:center;justify-content:center;padding:4px 16px 9px;flex:none}.dial-call{border:0;border-radius:99px;background:linear-gradient(#5bd6a0,#21b47b);color:white;font-size:12px;font-weight:900;box-shadow:0 3px #16976c;padding:10px 26px;cursor:pointer}.dial-delete{border:1px solid #f3b8de;background:#fff7fc;color:#bf71a7;border-radius:20px;padding:9px 12px;cursor:pointer}.call-hint{text-align:center;color:#a992aa;font-size:9px;padding:0 6px 6px}.contact-row{display:flex;width:100%;align-items:center;gap:10px;border:0;border-bottom:1px solid #f6d9eb;background:#fff9fde0;padding:9px;cursor:pointer;text-align:left}.contact-row span:nth-child(2){flex:1;color:#995889;font-size:11px;font-weight:800}.contact-row small{display:block;color:#b89eb1;font-size:9px;margin-top:4px}.contact-row .call-icon{background:#47cd9a;color:white;font-size:16px;border-radius:50%;width:30px;height:30px;display:grid;place-items:center}.call-live{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;background:radial-gradient(circle at 50% 20%,#fbd5ef,#d0f8ff 70%);color:#9d5a93;text-align:center}.call-live .large-avatar{width:87px;height:87px;border-radius:24px;font-size:50px;display:grid;place-items:center;box-shadow:0 5px 0 #eec1e3;border:4px solid white}.call-live h2{font-size:21px;margin:10px 0 6px}.call-live p{margin:0;font-size:12px}.call-live .disclaimer{font-size:10px;color:#ae86a4}.hangup{border:0;border-radius:50%;background:#f25178;color:white;width:62px;height:62px;font-size:30px;cursor:pointer;box-shadow:0 5px #cd365f}
+    /* CAMERA */
+    .camera-bg{height:100%;display:flex;flex-direction:column;background:#2b2237}.camera-view{flex:1;min-height:0;position:relative;overflow:hidden;background:linear-gradient(165deg,#fcb6e4,#ffd8a0 60%,#aeefff)}.camera-view::after{content:"";pointer-events:none;position:absolute;inset:7px;border:1px solid #ffffff9b;border-radius:8px}.camera-view video{width:100%;height:100%;object-fit:cover;display:block}.camera-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;background:radial-gradient(circle at 38% 32%,#fff6da 0 2%,transparent 27%),linear-gradient(130deg,#ffcbe9,#c5edff 67%,#ffccde);text-align:center;color:#ac5e94}.camera-placeholder .big{font-size:75px;line-height:1;filter:drop-shadow(0 6px 0 #e9aac8)}.camera-placeholder p{font-size:10px;background:#fff9;border-radius:10px;padding:8px 12px;max-width:80%;line-height:1.5}.camera-overlay{position:absolute;left:9px;top:8px;border:1px solid #fff9;background:#ff81b8b3;padding:5px 9px;border-radius:10px;color:#fff;font-size:10px;z-index:2}.camera-controls{flex:none;display:flex;justify-content:space-around;align-items:center;background:#382a49;padding:11px 8px;gap:5px;color:white}.camera-controls button{border:0;background:transparent;color:white;font-size:11px;font-weight:900;cursor:pointer;text-align:center;display:grid;justify-items:center;gap:4px}.camera-controls button span{font-size:24px}.camera-controls .shutter{width:59px;height:59px;border-radius:50%;background:#fff;border:5px solid #fda6d6;box-shadow:0 0 0 3px #fff9;color:#f256a5}.camera-controls .shutter::after{content:"✦";font-size:26px}.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:10px}.photo-tile{border:3px solid white;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 3px #f7bedf;cursor:pointer}.photo-tile img{width:100%;aspect-ratio:1;object-fit:cover;display:block}.photo-tile small{display:block;font-size:9px;text-align:center;padding:5px}.gallery-blank{text-align:center;margin:auto;color:#ae8da3;font-size:13px;line-height:1.8}.file-btn{border:0;border-radius:10px;background:#ffe3f2;color:#ad4488;font-size:10px;font-weight:900;padding:8px;cursor:pointer;display:inline-block}.gallery-toolbar{display:flex;gap:5px;justify-content:space-between;align-items:center;padding:7px 10px;background:#ffe7f7;font-size:10px}
+    /* KIRAKIRAIN */
+    .kira-bg{min-height:0;flex:1;display:flex;flex-direction:column;background:repeating-linear-gradient(90deg,#b6ecff 0 16px,#afe8fb 16px 32px,#c6f2ff 32px 48px)}
+    .kira-top{background:linear-gradient(180deg,#f9d2ea,#edafe0);padding:7px 8px;border-bottom:2px solid #f39fd2;display:flex;align-items:center;gap:7px}
+    .kira-logo-box{width:36px;height:36px;flex:none;border-radius:8px;border:2px solid #fff6ff;background:linear-gradient(180deg,#5ea2dc,#4876ba);color:#fff5b0;display:grid;place-items:center;font-size:25px;font-weight:1000;line-height:1.02;text-align:center;text-shadow:0 1px 5px #fff;box-shadow:0 2px 0 #c485b5}
+    .kira-brand{color:#d34a98;font-size:14px;font-weight:1000;letter-spacing:-.03em;text-shadow:1px 1px white}
+    .kira-top small{font-size:8px;color:#a26f96;display:block;line-height:1.3}
+    .kira-top .notif-btn{margin-left:auto;border:1px solid #e8a5d6;border-radius:10px;background:white;color:#db67a9;padding:6px 7px;cursor:pointer;box-shadow:0 2px 0 #f0b9dc}
+    .feed{flex:1;overflow:auto;padding:7px 7px 10px;min-height:0;scrollbar-width:thin}
+    .kira-shell{display:grid;grid-template-columns:48px minmax(0,1fr);gap:7px;align-items:start}
+    .kira-side-stamp{display:flex;flex-direction:column;gap:6px;position:sticky;top:0}
+    .kira-side-star{border:2px solid #fff7ff;border-radius:8px;background:linear-gradient(180deg,#6aa9dc,#4f80be);color:#fff4aa;text-align:center;font-size:26px;font-weight:1000;line-height:1.05;padding:7px 2px;box-shadow:0 2px 0 #c28ab6;letter-spacing:.02em}
+    .side-pill{border:1px solid #f0abd5;background:#fff8fd;color:#c25d99;border-radius:999px;padding:5px 2px;font-size:7px;font-weight:900;text-align:center;line-height:1.25}
+    .kira-main{min-width:0}
+    .community-blurb{margin:0 0 6px;padding:7px 8px;border-radius:10px;background:#fff7fcf2;border:2px solid #ffd8ef;box-shadow:0 2px 0 #f3c5e7;color:#9f6a95;font-size:8px;line-height:1.55}
+    .community-blurb b{color:#d84e9d}
+    .kira-filters{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 6px}
+    .kira-filters button{border:1px solid #efb7db;background:#fffafc;color:#bf5f98;border-radius:999px;padding:5px 8px;font-size:8px;font-weight:900;cursor:pointer;box-shadow:0 2px 0 #f3c5e7}
+    .kira-filters button.active{background:#f76fba;color:#fff;border-color:#f76fba}
+    .compose-box{display:flex;flex-direction:column;gap:6px;padding:7px;margin-bottom:7px;border-radius:10px;background:#fffdfef0;border:2px solid #ffe1f2;box-shadow:0 2px 0 #f3c5e7}
+    .compose-head{display:flex;align-items:center;gap:6px}.compose-head .avatar{width:27px;height:27px;border-radius:8px;font-size:15px}
+    .compose-meta{display:flex;gap:5px;flex-wrap:wrap;align-items:center}.compose-meta select,.compose-meta input{border:1px solid #f0c2df;border-radius:8px;padding:5px 7px;font-size:9px;color:#8d6187;background:#fff}.compose-meta input{flex:1;min-width:84px}.compose-box textarea{flex:1;min-width:0;resize:none;max-height:90px;border:1px solid #f2d1e6;outline:0;font-size:10px;color:#885a87;line-height:1.45;background:#fff;border-radius:8px;padding:7px}
+    .compose-actions{display:flex;justify-content:space-between;align-items:center;gap:8px}.compose-tip{font-size:8px;color:#b280a5;line-height:1.35}.compose-box button{align-self:end;border:0;border-radius:8px;background:#f269b3;color:white;font-weight:900;font-size:9px;padding:7px 9px;cursor:pointer;box-shadow:0 2px 0 #d5529f}
+    .post{display:grid;grid-template-columns:34px minmax(0,1fr);gap:7px;align-items:start;margin:0 0 8px}
+    .post-avatar-wrap{padding-top:2px}.post-avatar-wrap .avatar{width:32px;height:32px;border-radius:8px;font-size:18px;box-shadow:0 2px 0 #d8b6d8}
+    .post-main{min-width:0}
+    .post-headline{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:0 0 3px}
+    .post-headline strong{font-size:10px;color:#a75590}.post-headline time{font-size:8px;color:#bb98b5;margin-left:auto}
+    .post-meta{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 3px}.post-badge{display:inline-flex;align-items:center;padding:2px 5px;border-radius:999px;font-size:7px;font-weight:900}.post-badge.idol{background:#ffe2f1;color:#d24b98}.post-badge.fan{background:#def6ff;color:#4f8bb1}.post-badge.official{background:#fff1bf;color:#b37c11}
+    .post-bubble{position:relative;border:2px solid #ffd0e9;background:linear-gradient(180deg,#ffeaf6,#ffdced);border-radius:11px;padding:7px 8px 6px;box-shadow:0 2px 0 #efb9d8}
+    .post-bubble::before{content:'';position:absolute;left:-7px;top:10px;border-width:6px 7px 6px 0;border-style:solid;border-color:transparent #ffd0e9 transparent transparent}
+    .post-bubble::after{content:'';position:absolute;left:-4px;top:11px;border-width:5px 6px 5px 0;border-style:solid;border-color:transparent #ffe7f3 transparent transparent}
+    .post-text{font-size:10px;line-height:1.52;color:#8b6589;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+    .post-art{margin-top:6px;height:54px;display:grid;place-items:center;border:1px solid #fff7f9;border-radius:8px;background:radial-gradient(circle at 50% 30%,#fffbe9 0%,transparent 30%),linear-gradient(125deg,#fdd0e9,#c7f0ff 57%,#fdf2b0);font-size:26px;letter-spacing:5px;text-shadow:0 2px white}
+    .kira-empty{text-align:center;padding:18px 8px;border:2px dashed #ffd5ea;background:#fff7fb;border-radius:12px;color:#b68ca7;font-size:11px;line-height:1.6}
+    .kira-quick-links{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 6px}.kira-quick-links button{border:1px solid #efb7db;background:#fffefb;color:#bf5f98;border-radius:9px;padding:5px 7px;font-size:8px;font-weight:900;cursor:pointer;box-shadow:0 2px 0 #f3c5e7}
+    .kira-official-chip{display:inline-flex;align-items:center;gap:4px;border:1px solid #ffc975;background:#fff6d7;color:#b37c11;border-radius:999px;padding:2px 6px;font-size:7px;font-weight:900}
+    .kira-compose-collapsed{display:none}.kira-compose-collapsed.open{display:flex}
+    .kira-bottom-nav{flex:none;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:7px 10px 9px;background:linear-gradient(180deg,#ffe2f2,#ffc6e3);border-top:2px solid #f3a5d4}.kira-bottom-nav button{border:2px solid #fff6ff;border-radius:12px;background:linear-gradient(180deg,#fffdfd,#ffeaf5);box-shadow:0 2px 0 #e1a0c6;min-height:44px;display:grid;justify-items:center;align-content:center;gap:2px;color:#b75290;font-size:8px;font-weight:900;cursor:pointer}.kira-bottom-nav button .ico{width:24px;height:24px;border-radius:8px;background:linear-gradient(180deg,#ffd7ee,#fff5fb);display:grid;place-items:center;font-size:14px;border:1px solid #efb7d7}.kira-bottom-nav button.active{background:linear-gradient(180deg,#ff9dd1,#ee5bac);color:#fff;border-color:#e95dad}.kira-bottom-nav button.active .ico{background:linear-gradient(180deg,#fff4fb,#ffd8ef);color:#db5fa1}.kira-bottom-nav button.compose-btn{background:linear-gradient(180deg,#ffe9f6,#fffefc)}
+    .kira-notice{position:absolute;inset:0;z-index:15;display:grid;place-items:center;background:#38253c82;padding:16px}.notice-card{position:relative;width:100%;border:4px solid #fff5ff;border-radius:18px;box-shadow:0 0 0 2px #e8a1d4,0 11px 24px #79527966;background:repeating-linear-gradient(0deg,#fff3fb20 0 8px,transparent 8px 16px),repeating-linear-gradient(90deg,#fff3fb2c 0 8px,transparent 8px 16px),linear-gradient(155deg,#fbc4e4,#d780c2);padding:24px 17px 19px;text-align:center;color:#9a3988}.notice-card .spark{position:absolute;color:#ffef64;font-size:21px}.notice-card .spark.one{top:4px;left:7px}.notice-card .spark.two{top:6px;right:9px}.notice-card .spark.three{bottom:7px;left:13px}.notice-card .spark.four{bottom:4px;right:13px}.notice-card .mail{font-size:37px}.notice-card strong{display:block;margin:5px auto 14px;font-size:13px;line-height:1.65;color:#a03585;text-shadow:0 1px white}.notice-card .notice-cta{display:flex;gap:7px;justify-content:center}.notice-card button{border:2px solid #fff3fb;border-radius:12px;background:#fff7fd;color:#b0488d;padding:8px 13px;font-size:11px;font-weight:900;cursor:pointer}.notice-card button.pink{background:#ee59ad;color:white}
+
+    /* TELEPHONE — large character-photo incoming call screen, as in the anime reference */
+    .phone-list-intro{font-size:10px;line-height:1.5;text-align:center;color:#b45a96;padding:10px 11px 8px;background:#fff2fa;border-bottom:1px solid #f5c9e5}
+    .phone-list-intro strong{color:#df4b9b}
+    .contact-call-row{display:flex;align-items:center;gap:7px;padding:7px 6px;border-bottom:1px solid #f5c6e2;background:#ffffffb8}
+    .contact-call-row:nth-child(2n){background:#fff4fce0}
+    .contact-call-row .contact-identity{border:0;display:flex;min-width:0;flex:1;align-items:center;gap:7px;background:transparent;padding:0;text-align:left;cursor:pointer;color:#a84d8b}
+    .contact-call-row .contact-identity .avatar{width:30px;height:30px;flex-shrink:0;font-size:18px}
+    .contact-call-row .contact-identity .contact-label{font-weight:900;min-width:0;font-size:10px}
+    .contact-call-row .contact-identity .contact-label small{display:block;font-size:8px;line-height:1.5;color:#ba8fa9;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .contact-call-row .call-choice{flex-shrink:0;display:grid;place-items:center;gap:2px;border-radius:9px;border:1px solid white;box-shadow:0 2px 0 #d7b4d4;min-width:43px;padding:5px 4px 4px;cursor:pointer;font-size:8px;font-weight:900;line-height:1.2}
+    .contact-call-row .call-choice span{font-size:14px;line-height:1.1}
+    .contact-call-row .call-choice.incoming{background:linear-gradient(#ddfdfa,#b1f3e7);color:#158f7d;border-color:#8bdac8}
+    .contact-call-row .call-choice.outgoing{background:linear-gradient(#ffe9f6,#ffc5e5);color:#bb4b91;border-color:#f5a5d0}
+    .call-showcase{display:flex;align-items:center;justify-content:center;gap:8px;border:0;background:linear-gradient(90deg,#f4b2e3,#ffe2f3);border-bottom:2px solid white;color:#a53e84;font-weight:900;font-size:10px;padding:9px;cursor:pointer;width:100%}
+    .call-showcase span{font-size:16px}
+    /* Simple, illustration-free call screen: name and call controls only. */
+    .call-stage{
+      flex:1; min-height:0; position:relative; overflow:hidden;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      background:linear-gradient(145deg,#cbf1ff 0%,#f9d8f0 52%,#ffe8f6 100%);
+      color:#9c5489; text-align:center;
+    }
+    .call-name-only{
+      position:absolute;top:43%;left:10px;right:10px;transform:translateY(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+      word-break:keep-all; overflow-wrap:anywhere;
+    }
+    .call-name-only strong{font-size:clamp(18px,2.6vw,23px);line-height:1.25;font-weight:1000;color:#aa438c;text-shadow:0 2px #fff9}
+    .call-name-only small{font-size:12px;color:#ae7a9f;font-weight:800;line-height:1.3}
+    .call-controls{position:absolute;left:8px;right:8px;bottom:25px;display:flex;gap:55px;align-items:start;justify-content:center}
+    .call-controls.single{gap:0}
+    .call-button-wrapper{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:11px;color:#9e638e;font-weight:900}
+    .call-orb{border:3px solid #fff;box-shadow:inset 0 2px 7px #fff9,0 3px 0 #fff8,0 4px 12px #b884ac44;display:grid;place-items:center;width:61px;height:61px;border-radius:50%;cursor:pointer;transition:transform .15s}
+    .call-orb:hover{transform:scale(1.05)}.call-orb:active{transform:translateY(2px)}
+    .call-orb.accept{background:linear-gradient(145deg,#a3fff5,#39c9ba 67%,#1ca89a)}
+    .call-orb.decline{background:linear-gradient(145deg,#ffb7e0,#f05cad 67%,#d73c91)}
+    .call-orb svg{width:30px;height:30px;fill:#fff;stroke:#fff;filter:drop-shadow(0 1px 1px #9f4686)}
+    .call-orb.decline svg{transform:rotate(132deg)}
+    .toast{position:absolute;z-index:30;left:9px;right:9px;bottom:12px;padding:10px 12px;background:#593b61e8;color:white;border:1px solid #e8c9e7;border-radius:12px;box-shadow:0 4px 15px #3336;font-weight:800;font-size:10px;text-align:center;pointer-events:none;animation:popin .22s ease}.toast[hidden]{display:none}
+    .lightbox{position:absolute;inset:0;z-index:20;background:#282238de;display:grid;place-items:center;padding:10px}.lightbox img{max-width:100%;max-height:85%;border:3px solid white;border-radius:9px;object-fit:contain}.lightbox button{position:absolute;right:8px;top:8px;color:#b65094;background:white;border:0;border-radius:12px;padding:8px;font-size:11px;cursor:pointer}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(-7px) rotate(1deg)}}@keyframes twinkle{0%,100%{opacity:.6;transform:scale(.93)}50%{opacity:1;transform:scale(1.15)}}@keyframes skyShift{50%{opacity:.5}}@keyframes popin{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:840px){.world{grid-template-columns:1fr;justify-items:center;padding:12px 8px 26px;gap:5px}.intro{order:2;text-align:center;padding:10px 0 5px;max-width:480px}.intro h1{font-size:32px;margin:12px 0 4px}.intro h1 span{display:inline}.intro p{font-size:12px;line-height:1.7;margin:8px auto}.eyebrow{font-size:9px;padding:6px 12px}.usage{justify-content:center;margin:12px 0}.usage button{padding:8px 10px;font-size:10px}.aside-note{margin:0 auto}.device-zone{order:1;min-height:auto;padding:7px 0 20px}.device{transform:rotate(0)}.device:hover{transform:none}.orbit{height:70vh;width:100vw}.device-shadow{bottom:3px}}
+    @media(max-width:480px){.intro{display:none}.world{padding:8px 2px 17px;min-height:100dvh;display:flex;justify-content:center;align-items:center}.device-zone{padding:0;min-height:0}.device{--w:min(calc(100vw - 12px),calc((100dvh - 22px)*.548))}.device-shadow{bottom:-22px}.bg-star{display:none}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    /* ===== Stitch Design Integration | UI is adapted from the 2 supplied Stitch HTML screens. ===== */
+:root { --stitch-cream:#fff3c5; --stitch-rose:#ff2b92; --stitch-sky:#6fe1fa; }
+body{
+  background:radial-gradient(circle at 86% 8%,#ffe3f1 0,transparent 31%),
+             radial-gradient(circle at 14% 86%,#e7e6ff 0,transparent 30%),
+             linear-gradient(143deg,#fff3c4,#fff6e5 48%,#f7e2f5 100%);
+}
+.world { max-width:1200px;grid-template-columns:minmax(285px,1fr) minmax(400px,1fr) }
+.intro .eyebrow{background:#fff9e1;border-color:#ffdfa0;color:#b77660}
+.intro h1{color:#f72b94;text-shadow:3px 3px #fff,5px 6px #ffd4ac}
+.intro h1 span{color:#c270b2}
+.intro .accent{color:#e93897}
+.usage button{border-color:#ffd0e7;background:#fff9fd;color:#a7548e}
+.aside-note{background:#fffaf4d6;color:#91778b}
+.orbit{background:radial-gradient(ellipse,#ffe9a8 0%,#ffecdc 35%,transparent 70%)}
+.device-shadow{background:#a5775344}
+.device{
+  --w:min(395px,calc(100vw - 23px),calc((100dvh - 24px)*.548));
+  aspect-ratio:.548;
+  transform:none;
+  border:7px solid #d8a625;
+  border-radius:39px;
+  background:linear-gradient(135deg,#fff7c6 0%,#fbe168 17%,#daa12d 45%,#ba7c14 55%,#fff4ab 77%,#d19920 100%);
+  box-shadow:inset 1px 1px 3px #fff6c9,inset -2px -2px 3px #8e6818,
+     0 0 0 3px #ffefa3,0 19px 0 #c8599d,0 28px 45px #975a8b52,
+     0 35px 75px #a6804a50;
+}
+.device:hover{transform:none}
+.device::before{inset:5px;border:2px dotted #fff6b5;border-radius:31px;z-index:8}
+.device-inner{
+  inset:7px 7px 9px;border-radius:31px;border:2px solid #ffe7a0;
+  background:repeating-linear-gradient(45deg,#fff8 0 12px,transparent 12px 24px),
+    repeating-linear-gradient(-45deg,#ffd5ed80 0 12px,#fa65b280 12px 24px),
+    linear-gradient(145deg,#ffb5db 0,#fa4eaa 60%,#e32680 100%);
+  box-shadow:inset 0 0 12px #fff9,inset 0 0 4px #fff;
+}
+.device-inner::before{inset:5px;border:2px solid #fffc;opacity:.7;border-radius:28px}
+.corner{width:35px;height:35px;clip-path:polygon(0 0,100% 0,48% 48%,0 100%);background:linear-gradient(135deg,#fff9d0,#e6b329 63%,#a87516);opacity:.97;filter:none}
+.corner::after{content:'✦';font-size:15px;color:#fff3b1;left:8px;top:5px}
+.faceplate{
+  inset:19px 23px 22px;
+  grid-template-rows:73px minmax(0,1fr) 104px;
+  background:linear-gradient(160deg,#202025,#0f0c12 50%,#221923);
+  padding:0 2px 5px;
+  border-radius:26px;
+  clip-path:none;
+  border:2px solid #8b6319;
+  box-shadow:inset 0 0 10px #000e,0 2px 2px #492c3c;
+}
+.crest{gap:9px}
+.crest .sm-star{color:#ffe05b;font-size:20px;filter:drop-shadow(0 1px 1px #0009)}
+.crest .sm-star.small{font-size:13px}
+.crown-svg{width:64px;height:53px;filter:drop-shadow(0 2px 1px #ae7d22)}
+.display{
+  margin:0 9px;border-radius:14px;overflow:hidden;
+  border:2px solid #c39b3c;
+  box-shadow:inset 0 2px 9px #000a,0 0 0 2px #32251d,0 2px 4px #060407;
+}
+.statusbar{height:24px;background:#ff0685;border-bottom:1px solid #ffb5df;padding:0 8px;font-size:9px;letter-spacing:.02em}
+.stitch-status-label{font-weight:1000;background:#fff4;padding:2px 4px;border-radius:2px}
+.battery{width:20px;height:11px}
+#appView{background:#85e4fc}
+.chin{padding-top:11px}
+.chin-decor{top:28px;font-size:12px}
+.home-gem{width:62px;height:62px;box-shadow:0 0 0 3px #ffe898,0 0 14px #ffe3798c,0 2px 4px #0007;
+ background:radial-gradient(circle at 32% 23%,#ffffcd,#ecb32f 60%,#a76e13 88%)}
+.gem-inside{width:47px;height:47px;background:radial-gradient(circle at 35% 17%,#ffe7f7,#ff67b7 40%,#f52d8e 66%,#ab105f);border-color:#f8da9c}
+.gem-inside svg{width:32px;height:32px}
+.bow{width:160px;height:49px;bottom:0;opacity:.95}
+.chin-stars{bottom:1px;font-size:14px}
+.app-header{background:linear-gradient(180deg,#fff3fe,#ffd5f0);border-bottom:2px solid #ff9dd5;color:#c14e96;height:32px;font-size:11px}
+.back-btn{background:linear-gradient(90deg,#24c7f9,#00a9df);border:1px solid white;color:white;border-radius:99px;font-size:10px;box-shadow:0 2px 0 #77bcd2}
+.stitch-tiny-star svg polygon{fill:#ffdc33}
+/* Stitch home wallpaper: tiny sky dots, three faceted stars and playful candy icons. */
+.stitch-home{position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;width:100%;height:100%;background-color:#5fd1f4;
+ background-image:radial-gradient(circle,#ffffff8a 1.25px,transparent 1.6px),linear-gradient(180deg,#7de7ff,#54c5ee 62%,#80e3ff);
+ background-size:9px 9px,100% 100%;}
+.stitch-home::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 20% 15%,#ffffffa8 0,transparent 17%),radial-gradient(circle at 75% 44%,#ffffff66 0,transparent 25%);opacity:.6}
+.stitch-sparkle{position:absolute;color:#fff;font-size:19px;filter:drop-shadow(0 0 5px #fff);z-index:1;animation:twinkle 4s ease-in-out infinite}
+.stitch-sparkle.a{top:10%;left:8%}.stitch-sparkle.b{top:19%;right:11%;font-size:15px;animation-delay:-1s}.stitch-sparkle.c{top:55%;left:8%;font-size:14px;animation-delay:-2s}.stitch-sparkle.d{top:57%;right:13%;font-size:13px;animation-delay:-2.7s}
+.stitch-stars{position:absolute;left:0;right:0;top:0;bottom:112px;pointer-events:none}
+.stitch-stars > *{pointer-events:auto}
+.stitch-gold-star{position:absolute;top:4%;left:27%;width:26%;max-width:95px;filter:drop-shadow(0 5px 3px #a5792255);animation:float 5s ease-in-out infinite}
+.stitch-small-star{position:absolute;top:39%;left:11%;width:19%;filter:drop-shadow(0 4px 4px #a5792255);animation:float 5s ease-in-out -2s infinite}
+.stitch-tiny-star{position:absolute;top:23%;right:17%;width:9%;filter:drop-shadow(0 2px 2px #b78647)}
+.stitch-star-svg,.stitch-pink-svg,.stitch-tiny-svg{display:block;width:100%;height:auto}
+.stitch-pink-star{
+ position:absolute;top:27%;right:8%;width:48%;max-width:180px;
+ background:transparent;border:0;padding:0;cursor:pointer;filter:drop-shadow(0 9px 8px #bb39774f);animation:float 5s ease-in-out -1s infinite;
+}
+.stitch-pink-star:hover{filter:drop-shadow(0 6px 9px #ffffffa0) drop-shadow(0 6px 12px #aa3b7e80)}
+.star-link-tag{position:absolute;left:18%;right:18%;bottom:-4px;padding:4px 1px;border-radius:100px;background:#ffedffed;border:1px solid #ffe5a2;color:#b53d87;font-size:9px;font-weight:1000;text-shadow:none;box-shadow:0 2px 5px #a7509150}
+.stitch-notice{position:absolute;bottom:89px;left:9px;right:9px;min-height:46px;display:flex;align-items:center;gap:7px;padding:7px 9px;background:linear-gradient(160deg,#ffdef1f5,#ffbaddf3);border:2px solid #fff;border-radius:13px;box-shadow:0 3px 0 #ec8ac8,0 4px 15px #c23a8a55;text-align:left;cursor:pointer;color:#a54d86;z-index:3}
+.stitch-notice .envelope{font-size:20px}
+.stitch-notice strong{display:block;font-size:9px;line-height:1.25}
+.stitch-notice small{font-size:8px;line-height:1.3;color:#b26999;display:block}
+.stitch-notice .chev{margin-left:auto;font-size:17px}
+.stitch-dock{position:relative;z-index:4;left:auto;right:auto;bottom:auto;width:100%;padding:0 6px 8px;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;align-items:end;margin-top:auto}
+.stitch-dock .home-launcher{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:3px;color:#ae2676;font-size:9px;font-weight:1000;line-height:1.15;text-shadow:0 1px #fff,0 0 4px #fff9;cursor:pointer;padding:2px 0}
+.stitch-dock .icon-tile{width:clamp(42px,11.2vw,55px);height:clamp(42px,11.2vw,55px);border-radius:15px;border:3px solid #fff9fd;position:relative;display:grid;place-items:center;box-shadow:0 3px 1px #ac459860,inset 0 0 0 2px #ffffff77;transition:transform .2s}
+.stitch-dock .home-launcher:hover .icon-tile{transform:translateY(-2px)}
+.stitch-dock .icon-tile svg{height:31px;width:31px;fill:none;stroke:white;stroke-linecap:round;stroke-width:2.7;filter:drop-shadow(0 1px 1px #86265d85)}
+.stitch-dock .icon-tile.stitch-camera{background:linear-gradient(145deg,#cc52d5,#9a16ae 52%,#f12195)}
+.stitch-dock .icon-tile.stitch-mail{background:linear-gradient(145deg,#fffafd,#ffe0f1 85%)}
+.stitch-dock .icon-tile.stitch-mail svg{stroke:#77128c;stroke-width:2.3}
+.stitch-dock .icon-tile.stitch-phone{background:linear-gradient(145deg,#b7fff3,#28c6b3 84%)}
+.stitch-dock .icon-tile.stitch-kira{background:linear-gradient(145deg,#ff53ac,#ed0078 72%,#b7005b)}
+.stitch-dock .app-unread-badge{top:-7px;right:-7px}
+/* Kira: a bright blue, vertically striped timeline, pink pointed fan bubbles, tiny icon dock. */
+.stitch-kira{background:repeating-linear-gradient(90deg,#b2efff 0 17px,#9fe6fb 17px 34px)}
+.kira-screen-head{display:flex;justify-content:space-between;align-items:center;gap:4px;flex:none;height:37px;padding:0 8px;background:repeating-linear-gradient(90deg,#aeebfa 0 16px,#97e2f9 16px 32px);border-bottom:1px solid #ffffff70}
+.kira-screen-head button{cursor:pointer;white-space:nowrap}
+.kira-back-pill{border:2px solid white;border-radius:100px;background:linear-gradient(#3adcff,#00a5de);color:white;font-size:9px;font-weight:900;padding:4px 8px;box-shadow:0 2px 4px #318fbd88}
+.kira-name-pill{border:1px solid #fff;background:#fff2fa;color:#e51f81;border-radius:100px;font-size:10px;font-weight:900;padding:4px 7px;max-width:135px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kira-compose-top{background:#fe56af;border:2px solid white;box-shadow:0 2px 3px #aa3b83a6;color:white;border-radius:11px;font-size:13px;font-weight:900;padding:3px 7px}
+.kira-ref-filterbar{display:flex;flex:none;gap:4px;align-items:center;overflow-x:auto;min-height:27px;scrollbar-width:none;padding:2px 6px;background:#b1f0ff7a}
+.kira-ref-filterbar button{background:#fff5fd;border:1px solid #f5aed4;border-radius:100px;padding:4px 6px;color:#cb478b;font-size:9px;font-weight:900;white-space:nowrap;cursor:pointer}
+.kira-ref-filterbar button.active{background:#f553a6;color:white;border-color:white}
+.stitch-kira .stitch-feed{padding:5px 7px 5px;scrollbar-width:thin;flex:1;min-height:0;overflow-y:auto}
+.stitch-feed .post{margin:0 0 8px;display:grid;grid-template-columns:35px minmax(0,1fr);gap:6px;align-items:start}
+.stitch-feed .post-avatar-wrap .avatar{width:34px;height:34px;border:2px solid #fff;border-radius:11px;background:linear-gradient(135deg,#8edcef,#edbbe8);box-shadow:0 2px 0 #5294d4;color:#793665;font-size:18px}
+.stitch-feed .post-main{min-width:0}
+.stitch-feed .post-headline{margin-bottom:2px;gap:3px}
+.stitch-feed .post-headline strong{font-size:9px;color:#4d4176;background:#ffffffc9;padding:1px 4px;border-radius:4px;line-height:1.4}
+.stitch-feed .post-headline time{font-size:8px;color:#7a72b2;background:#fff7fe9c;padding:1px 3px;border-radius:4px}
+.stitch-feed .post-meta{display:none}
+.stitch-feed .post-bubble{border:1.5px solid #ff8fbd;background:linear-gradient(180deg,#fff 0%,#fff0f6 40%,#ffdfed 100%);box-shadow:0 2px 4px #e6307e2f,inset 0 1px white;border-radius:16px;padding:8px 9px 6px}
+.stitch-feed .post-bubble::before{left:-8px;top:13px;border-width:5px 7px 5px 0;border-color:transparent #ff8fbd transparent transparent}
+.stitch-feed .post-bubble::after{left:-5px;top:14px;border-width:4px 6px 4px 0;border-color:transparent #fff6fb transparent transparent}
+.stitch-feed .post-text{font-size:10px;font-weight:800;color:#403249;line-height:1.48}
+.stitch-feed .post-art{display:none}
+.stitch-feed .post-footer{padding-top:4px;gap:6px}
+.stitch-feed .post-footer button{background:#ffffff86;color:#c25c9a;border:1px solid #f5c5df;padding:3px 6px;border-radius:6px;font-size:9px}
+.stitch-kira .kira-compose-collapsed{display:none}.stitch-kira .kira-compose-collapsed.open{display:flex;margin:1px 5px 7px;background:#fff6fef2}
+.stitch-kira .kira-bottom-nav{display:grid;grid-template-columns:repeat(3,1fr);padding:6px 11px 7px;background:linear-gradient(#c8f2ffbb,#e0f0f8);border-top:2px solid #fff5;gap:6px}
+.stitch-kira .kira-bottom-nav button{display:grid;place-items:center;gap:2px;min-height:49px;border:0;background:transparent;box-shadow:none;border-radius:0;color:#dc2688;font-size:9px;padding:0;align-content:center}
+.stitch-kira .kira-bottom-nav button .ico{width:44px;height:42px;border-radius:14px;border:3px solid white;display:grid;place-items:center;background:linear-gradient(#ffa3d6,#e70c91);box-shadow:0 2px 5px #b13c8d77;color:white}
+.stitch-kira .kira-bottom-nav button:nth-child(2) .ico{background:linear-gradient(#fffdff,#ffd8ed);color:#d62990}
+.stitch-kira .kira-bottom-nav button.active .ico{background:linear-gradient(#ef44a6,#cb0b74);color:white}
+.stitch-kira .kira-bottom-nav button .ico svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2.5}
+.stitch-kira .kira-bottom-nav button:nth-child(3) .ico svg{fill:white;stroke:white}
+@media(max-width:840px){.world{padding:8px 7px 20px}.device-zone{min-height:0}.device{transform:none}.device:hover{transform:none}}
+@media(max-width:480px){.world{padding:8px 3px 16px}.device{--w:min(calc(100vw - 16px),calc((100dvh - 25px)*.548))}.faceplate{inset:16px 21px 20px;grid-template-rows:65px minmax(0,1fr) 94px}.display{margin:0 7px}.crest .sm-star{font-size:17px}.crest .sm-star.small{font-size:12px}.crown-svg{width:57px;height:46px}.home-gem{width:58px;height:58px}.gem-inside{width:43px;height:43px}.stitch-stars{bottom:104px}.stitch-notice{bottom:87px}.stitch-dock .icon-tile{width:46px;height:46px}.stitch-dock .home-launcher{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.stitch-sparkle,.stitch-gold-star,.stitch-small-star,.stitch-pink-star{animation:none!important}}
+
+  
+    /* home cleanup requested by user */
+    .bg-star,.intro{display:none!important}
+    .world{display:flex;justify-content:center;align-items:center;max-width:none;padding:10px 8px;gap:0}
+    .device-zone{min-height:100dvh;padding:0}
+    .device{transform:rotate(0)}
+    .device:hover{transform:none}
+    /* Keep the original oversized pink star visible below the new-message popup. */
+    .stitch-pink-star{top:60%}
+    .stitch-popup-wrap{position:absolute;left:0;right:0;top:52px;display:grid;place-items:center;z-index:4;padding:0 12px;pointer-events:none}
+    .stitch-popup{pointer-events:auto;position:relative;width:min(100%,254px);border-radius:21px;padding:17px 16px 18px;background-color:#f1589c;background-image:linear-gradient(rgba(255,255,255,.26) 1.5px,transparent 1.5px),linear-gradient(90deg,rgba(255,255,255,.26) 1.5px,transparent 1.5px),radial-gradient(circle at 50% 20%,rgba(255,220,240,.46) 0%,transparent 70%);background-size:4px 4px,4px 4px,100% 100%;box-shadow:0 9px 22px -4px rgba(225,29,115,.42),0 0 0 2.2px rgba(255,255,255,.72),inset 0 0 12px rgba(255,255,255,.35);text-align:center;color:#fff}
+    .stitch-popup .stars-top,.stitch-popup .stars-bottom{position:absolute;display:flex;gap:4px;align-items:center;pointer-events:none}.stitch-popup .stars-top{left:9px;top:8px}.stitch-popup .stars-bottom{right:9px;bottom:8px}
+    .stitch-popup .stars-top span:first-child,.stitch-popup .stars-bottom span:last-child{font-size:14px;color:#ffe81e;text-shadow:0 0 3px #fff}.stitch-popup .stars-top span:last-child,.stitch-popup .stars-bottom span:first-child{font-size:9px;color:#fff48f}
+    .stitch-popup .popup-sender{display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:4px;font-size:15px;font-weight:1000;letter-spacing:.02em;text-shadow:0 1.5px 2px rgba(150,0,70,.65)}
+    .stitch-popup .popup-msg{font-size:13px;font-weight:1000;line-height:1.5;margin-bottom:11px;text-shadow:0 1.5px 2px rgba(150,0,70,.6)}
+    .stitch-popup .popup-open{display:inline-flex;align-items:center;justify-content:center;min-width:66px;min-height:34px;padding:6px 18px;background:#ffffffef;border:0;border-radius:13px;box-shadow:0 3px 10px rgba(150,0,60,.28),0 0 0 1.4px rgba(255,255,255,.9);cursor:pointer}
+    .stitch-popup .popup-open:hover{transform:translateY(-1px)}
+    .popup-envelope{position:relative;width:34px;height:19px;border-radius:4px;background:linear-gradient(to bottom,#ffafd3,#ff8bb8);border:1px solid #ff62a5;box-shadow:inset 0 1px 0 #ffffff77;display:block}
+    .popup-envelope::before{content:'';position:absolute;left:0;right:0;top:0;height:100%;background:linear-gradient(145deg,transparent 49%,#ff4d97 50%,transparent 51%),linear-gradient(-145deg,transparent 49%,#ff4d97 50%,transparent 51%);opacity:.95}
+    .popup-envelope::after{content:'❤';position:absolute;inset:0;display:grid;place-items:center;font-size:11px;color:#ff0f7d;line-height:1}
+    .stitch-popup-wrap.overlay{top:60px;z-index:9}
+    .stitch-popup-wrap.overlay .stitch-popup{width:min(100%,258px)}
+    @media(max-width:480px){.world{padding:0}.device-zone{min-height:100dvh}.stitch-popup-wrap{top:56px;padding:0 11px}.stitch-popup{width:min(100%,265px)}.stitch-popup-wrap.overlay{top:58px}}
+
+  
+/* ===== Stitch waiting / in-call screens (2026-10-25) ===== */
+.stitch-call-stage{
+  position:relative;flex:1;min-height:0;width:100%;overflow:hidden;
+  display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;
+  box-sizing:border-box;padding:12px 10px 10px;
+  border:3px solid #ffdf67;border-radius:12px;
+  color:white;text-align:center;
+  background:
+    radial-gradient(circle at 88% 68%, #ffe5b0a8 0, transparent 28%),
+    radial-gradient(circle at 8% 80%, #f7b3d6b5 0, transparent 35%),
+    linear-gradient(153deg,#937cf1 0%,#b194ed 28%,#ecabd8 68%,#82d8fb 100%);
+  box-shadow:inset 0 0 15px #ffffff38,0 0 0 1px #5c4b73;
+}
+.stitch-call-head{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:4px;flex:none}
+.stitch-call-head .incoming-label{padding:3px 16px;border-radius:999px;background:#4d3c6888;color:#fff;font-weight:900;font-size:9px;line-height:1.2;letter-spacing:.03em}
+.stitch-call-head .caller-jp{font-size:clamp(17px,2.4vw,22px);color:#ef2bc2;line-height:1.18;font-weight:1000;text-shadow:1.5px 1.5px #fff,-1.5px -1.5px #fff,1.5px -1.5px #fff,-1.5px 1.5px #fff,0 3px 4px #8b3b9566;overflow-wrap:anywhere;max-width:100%}
+.stitch-call-head .caller-romaji{font-size:10px;line-height:1.3;color:#fff;font-weight:1000;text-shadow:0 2px 2px #6e5788}
+.stitch-call-time{margin-top:3px;border:1px solid #ffffff75;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:5px;background:#ffffff19;color:#fff;font-size:11px;font-weight:1000;padding:4px 12px;min-width:79px;line-height:1}
+.stitch-call-time svg{width:12px;height:12px;fill:none;stroke:#ffe94e;stroke-width:2;stroke-linecap:round}
+.stitch-call-stars{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.stitch-call-stars span{position:absolute;color:#fff9cc;text-shadow:0 0 8px #fffc;font-size:19px;animation:twinkle 5s ease-in-out infinite}
+.stitch-call-stars span:nth-child(1){top:17%;left:11%;font-size:17px}.stitch-call-stars span:nth-child(2){top:32%;right:9%;font-size:25px;animation-delay:-1s}.stitch-call-stars span:nth-child(3){bottom:27%;left:12%;font-size:12px;animation-delay:-2s}.stitch-call-stars span:nth-child(4){bottom:25%;right:11%;font-size:19px;animation-delay:-3s}
+.stitch-call-center{position:relative;z-index:1;min-height:80px;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px 0}
+.stitch-call-emblem{width:min(138px,70%);height:auto;aspect-ratio:1;position:relative;display:grid;place-items:center;filter:drop-shadow(0 3px 11px #ffffff33)}
+.stitch-call-emblem::before{content:'';position:absolute;inset:0;border:2px dashed #ffffff72;border-radius:50%;animation:callEmblemBreath 6s ease-in-out infinite}
+.stitch-call-emblem::after{content:'';position:absolute;inset:11px;border:1.5px solid #ffffff8b;border-radius:50%;background:linear-gradient(135deg,#fff3 0%,#ffffff08 100%)}
+.stitch-call-emblem svg{position:relative;z-index:1;width:85%;height:85%;overflow:visible}
+@keyframes callEmblemBreath{50%{opacity:.5;transform:scale(.985)}}
+.stitch-call-bottom{position:relative;z-index:3;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:9px;min-height:95px}
+.stitch-call-actions{width:100%;display:flex;align-items:flex-start;justify-content:space-around;gap:16px;padding:0 4px}
+.stitch-call-action{display:flex;flex-direction:column;align-items:center;gap:6px;color:#fff;font-size:10px;font-weight:1000;text-shadow:0 2px 3px #74547f;min-width:62px}
+.stitch-call-circle{border-radius:50%;display:grid;place-items:center;width:60px;height:60px;cursor:pointer;border:3px solid #ffffffce;box-shadow:0 4px 0 #ffffff37,0 5px 15px #5f3a8468,inset 0 2px 5px #fff9;transition:filter .16s,transform .16s}
+.stitch-call-circle:hover{filter:brightness(1.09)}.stitch-call-circle:active{transform:scale(.94)}
+.stitch-call-circle svg{width:29px;height:29px;fill:#fff;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px #8f337188)}
+.stitch-call-circle.reject,.stitch-call-circle.end{background:linear-gradient(160deg,#ff90c8,#ec0d79 62%,#bd055e)}
+.stitch-call-circle.accept{background:linear-gradient(160deg,#a8ffda,#12c995 62%,#008c76)}
+.stitch-call-circle.reject svg{transform:rotate(132deg)}
+.stitch-call-ready{font-size:8px;color:#fff;font-weight:900;text-shadow:0 1px 4px #5a5470;margin:0 0 5px}
+.stitch-call-ready span{color:#ff2a70;font-size:13px;margin-right:4px}
+.stitch-call-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;gap:4px;align-items:start;justify-items:center}
+.stitch-call-tool{border:0;background:transparent;color:#fff;font-size:8px;font-weight:1000;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;padding:0;min-width:0;text-shadow:0 1px 3px #916da0}
+.stitch-call-tool .stitch-call-tool-icon{width:43px;height:43px;border-radius:50%;border:1.5px solid #ffffffaf;background:linear-gradient(145deg,#fff8,#f7d9f26f);box-shadow:0 3px 6px #774a8e55;display:grid;place-items:center;color:#5e2291}
+.stitch-call-tool svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.stitch-call-tool.active .stitch-call-tool-icon{border-color:#ffe45e;box-shadow:0 0 0 1px #ffe45e,0 0 10px #fff1ad;background:linear-gradient(145deg,#fff9df,#f9ddf5)}
+.stitch-call-tool:hover .stitch-call-tool-icon{filter:brightness(1.06)}
+.stitch-call-tool span:last-child{white-space:nowrap;font-size:8px;letter-spacing:-.03em}
+.stitch-call-end .stitch-call-circle{width:57px;height:57px}
+.stitch-call-end .stitch-call-circle svg{transform:rotate(132deg)}
+.stitch-call-flyout{position:absolute;z-index:12;inset:auto 8px 100px;border:2px solid #ffe577;border-radius:14px;background:linear-gradient(145deg,#fff9fef8,#ffe3f6fa);box-shadow:0 10px 25px #69447fa3;padding:10px;color:#a04a91;display:flex;flex-direction:column;gap:7px}
+.stitch-call-flyout-heading{display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:1000}
+.stitch-call-flyout-heading button{background:#fce1f4;border:1px solid #ebb5d8;color:#a34b90;border-radius:7px;min-width:25px;height:22px;cursor:pointer}
+.stitch-call-flyout .call-keypad-digits{font-size:12px;min-height:18px;font-weight:900;letter-spacing:.05em}
+.stitch-call-flyout .call-keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.stitch-call-flyout .call-keypad button{border:1px solid #ebb5d8;border-radius:7px;background:#fff;color:#ab4c95;min-height:29px;cursor:pointer;font-size:13px;font-weight:1000}
+.stitch-call-flyout textarea{width:100%;min-height:73px;resize:none;border:1px solid #e4a3d4;border-radius:7px;padding:7px;color:#995789;font-size:10px;font-family:inherit}
+.stitch-call-flyout .memo-save{align-self:flex-end;padding:5px 12px;background:#ef63ad;border:1px solid #fff;color:#fff;border-radius:8px;font-size:10px;font-weight:900;cursor:pointer}
+@media (max-width:480px){
+ .stitch-call-stage{padding:9px 7px 9px}
+ .stitch-call-head{gap:3px}.stitch-call-head .caller-jp{font-size:18px}.stitch-call-center{min-height:71px;padding:3px 0}
+ .stitch-call-emblem{width:min(120px,68%)}.stitch-call-bottom{gap:7px;min-height:86px}
+ .stitch-call-circle{height:56px;width:56px}.stitch-call-tool .stitch-call-tool-icon{height:39px;width:39px}
+ .stitch-call-end .stitch-call-circle{height:53px;width:53px}
+}
+@media (prefers-reduced-motion:reduce){.stitch-call-emblem::before{animation:none}}
+
+
+/* Anonymous fan messages: icon only, no text label. */
+.stitch-feed .post-headline .kira-fan-label{display:none}
+
+</style>
+</head>
+<body>
+  <main class="world">
+
+    <section class="device-zone" aria-label="인터랙티브 니지노 유메 휴대폰">
+      <div class="orbit" aria-hidden="true"></div><div class="device-shadow" aria-hidden="true"></div>
+      <div class="device">
+        <div class="device-inner"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></div>
+        <div class="shell-glints" aria-hidden="true"><span>✧</span><span>✦</span><span>✧</span><span>✦</span></div>
+        <div class="faceplate">
+          <div class="crest" aria-hidden="true">
+            <span class="sm-star small">★</span><span class="sm-star">★</span>
+            <svg class="crown-svg" fill="none" viewbox="0 0 60 44">
+<defs>
+<linearGradient id="tiaraGold" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#FFF9DC"></stop>
+<stop offset="35%" stop-color="#FCD33F"></stop>
+<stop offset="100%" stop-color="#A87208"></stop>
+</linearGradient>
+</defs>
+<!-- Tiara base & arches -->
+<path d="M6 35 C 18 39, 42 39, 54 35 C 50 20, 48 11, 46 9 C 43 18, 38 25, 30 18 C 22 25, 17 18, 14 9 C 12 11, 10 20, 6 35 Z" fill="url(#tiaraGold)" stroke="#FFF2B2" stroke-width="1.2"></path>
+<!-- Tiara Jewels / Central Cross & Orbs -->
+<circle cx="30" cy="8" fill="#FFE57F" r="3.2" stroke="#B07C10" stroke-width="0.8"></circle>
+<circle cx="13" cy="10" fill="#FFE57F" r="2.2"></circle>
+<circle cx="47" cy="10" fill="#FFE57F" r="2.2"></circle>
+<ellipse cx="30" cy="24" fill="#1A1A1E" rx="4" ry="5.5" stroke="#FFDF6D" stroke-width="1.2"></ellipse>
+<ellipse cx="20" cy="27" fill="#1A1A1E" rx="2.5" ry="3.5" stroke="#FFDF6D" stroke-width="1"></ellipse>
+<ellipse cx="40" cy="27" fill="#1A1A1E" rx="2.5" ry="3.5" stroke="#FFDF6D" stroke-width="1"></ellipse>
+<rect fill="#FFEF9F" height="2.5" rx="1" width="36" x="12" y="36"></rect>
+</svg>
+            <span class="sm-star">★</span><span class="sm-star small">★</span>
+          </div>
+          <div class="display" aria-label="휴대폰 화면">
+            <div class="statusbar"><span class="stitch-status-label">AIKATSU! ✦</span><span class="status-right"><span id="timeNow">12:00</span><span aria-hidden="true">◖))</span><span aria-hidden="true">◷</span><span class="battery"><b></b></span></span></div>
+            <div id="appView" aria-live="polite"></div><div id="toast" class="toast" hidden role="status"></div>
+          </div>
+          <div class="chin">
+            <span class="chin-decor left" aria-hidden="true">✦ · ·</span><span class="chin-decor right" aria-hidden="true">· · ✦</span>
+            <button type="button" class="home-gem" data-app="home" aria-label="보석 홈 버튼">
+              <span class="gem-inside"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 2L51 18L54 39L30 57L7 39L9 18Z" fill="#ffc8f0" stroke="#fff1ff" stroke-width="2"/><path d="M30 2L39 20L30 57L21 20Z" fill="#ef73be"/><path d="M9 18L21 20L30 57L7 39Z" fill="#fa95d2"/><path d="M51 18L39 20L30 57L54 39Z" fill="#d82a93"/><path d="M9 18L30 2L21 20Z" fill="#ffe8ff"/><path d="M30 2L51 18L39 20Z" fill="#f3ade0"/><path d="M21 20L39 20L30 57Z" fill="#ffbfe9"/></svg></span>
+            </button>
+            <svg class="bow" viewBox="0 0 230 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="bowgold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff5a5"/><stop offset=".5" stop-color="#d8a53f"/><stop offset="1" stop-color="#ffe285"/></linearGradient></defs><path d="M109 31 C91 4 58 3 35 12L46 40L25 65C59 70 95 63 112 43Z" fill="url(#bowgold)" stroke="#c19338" stroke-width="1"/><path d="M121 31C144 0 177 2 199 9L188 39L207 65C172 69 140 61 120 43Z" fill="url(#bowgold)" stroke="#c19338"/><path d="M107 43 L63 76L73 50L103 39 M124 40L153 76L161 48L129 35" fill="#f9d979"/><path d="M105 29L128 28L131 45L109 49Z" fill="#ffe69d" stroke="#bd8a39"/><path d="M39 13 L101 37 M190 12L130 37" stroke="#fff6b4" stroke-width="4" opacity=".7"/></svg>
+            <div class="chin-stars" aria-hidden="true"><span>★</span><span>✦</span><span>★</span><span>✦</span><span>★</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+<script>
+(() => {
+  'use strict';
+  const KEY = 'yume-star-phone-prototype-v1';
+  const $ = (q,root=document) => root.querySelector(q);
+  const view = $('#appView');
+  // Character lines: user-provided sample dialogue + fan-made variations in the same tone.
+  const contacts = {
+    rola: {
+      name:'사쿠라바 로라', jp:'桜庭ローラ', mark:'🎸', cls:'av-rola', code:'0101',
+      lines:[
+        '라이브 수고했어. 유메! 다음에는 라이브, 같이 하게 해 줘, 알겠지!',
+        '우리 둘이라면 최강이잖아, 그렇지 않아?',
+        '재밌잖아! 그거, 괜찮은 것 같은데.',
+        '다음에는 지지 않을 거니까!',
+        '유메, 오늘 무대 멋졌어! 하지만 다음 라이브는 내가 더 빛날 거니까 각오해!',
+        '좋아! 우리 둘이 함께라면 분명 최고의 라이브가 될 거야.',
+        '그거 정말 재밌겠는걸? 유메, 나도 같이 할래!'
+      ],
+      replies:[
+        '좋아! 우리 둘이라면 최강이잖아. 이번에도 제대로 해보자!',
+        '유메, 나도 그렇게 생각했어! 재밌겠는걸!',
+        '약속했어! 다음 라이브에서는 나도 절대 지지 않을 거야!'
+      ]
+    },
+    koharu: {
+      name:'나나쿠라 코하루', jp:'七倉小春', mark:'🌼', cls:'av-koharu', code:'0202',
+      lines:[
+        '유메 쨩, 라이브 수고했어!',
+        '레인보우 베리 파르페의 새로운 프리미엄 레어 드레스가 나왔으니까 시착해보지 않을래?',
+        '유메 쨩, 오늘은 일정 있어?',
+        '유메 쨩한테 잘 어울릴 것 같은 드레스를 발견했어! 시간 나면 같이 보러 갈래?',
+        '오늘도 정말 반짝반짝 빛났어, 유메 쨩! 나까지 기분이 좋아졌어 ♡',
+        '괜찮다면 다음에 같이 드레스 디자인을 구경하러 가자!'
+      ],
+      replies:[
+        '응, 유메 쨩! 같이 하면 정말 즐거울 것 같아 ♡',
+        '유메 쨩한테 꼭 보여주고 싶었어. 기대해줘!',
+        '무리하지 말고 천천히 해도 괜찮아. 언제나 응원하고 있어!'
+      ]
+    },
+    mahiru: {
+      name:'카스미 마히루', jp:'香澄真昼', mark:'☀️', cls:'av-mahiru', code:'0404',
+      lines:[
+        '유메, 라이브 수고했어. 같이 초코 머핀이라도 어때?',
+        '오늘은 언니와 만나기로 한 날이라 못 갈 것 같네. 미안해!',
+        '응? 나에게 스타일링을 더 배우고 싶다고? 좋아. 그럼 내 방으로 와줬으면 좋겠는데.',
+        '유메, 오늘의 스타일링 멋졌어. 색을 조금 바꾸면 더 잘 어울릴 것 같아.',
+        '연습이 끝나면 잠깐 쉴래? 차분하게 이야기하고 싶은 게 있어.',
+        '서두르지 않아도 괜찮아. 하나씩 해보면 분명 더 멋져질 거야.'
+      ],
+      replies:[
+        '응, 좋아. 그럼 연습이 끝나고 천천히 이야기하자.',
+        '유메라면 충분히 할 수 있을 거야. 내가 아는 만큼 알려줄게.',
+        '고마워, 유메. 이번에는 같이 맛있는 초코 머핀을 먹자.'
+      ]
+    },
+    ako: {
+      name:'사오토메 아코', jp:'早乙女あこ', mark:'🐈', cls:'av-ako', code:'0303',
+      lines:[
+        '유메! 라이브 수고많으셨어요, 유메다운 힘찬 라이브다워요!',
+        '연기 연습을 봐달라고요? 어쩔 수 없군요, 사오토메 아코가 같이 해드릴 테니까요!',
+        '유메, 지금 일정에 대해서 이야기하려고 하는데, 시간 있나요?',
+        '유메! 오늘도 기운이 넘치시네요. 뭐, 그런 점은 인정해 드릴게요!',
+        '이번 연기 연습은 특별히 도와드리는 거예요! 그러니까 열심히 하셔야 해요!',
+        '흥, 그렇게 부탁하신다면 어쩔 수 없죠. 사오토메 아코에게 맡기세요!'
+      ],
+      replies:[
+        '정말이지, 어쩔 수 없군요! 이번만 특별히 도와드릴게요!',
+        '유메, 그럼 제 말을 잘 들으셔야 해요! 알겠죠?',
+        '뭐, 나쁘지 않네요. 이번에도 같이 힘내보자고요!'
+      ]
+    }
+  };
+  const contactOrder=['rola','koharu','mahiru','ako'];
+  const seedAt=Date.now();
+  const seededMail=(text,minutesAgo)=>{
+    const date=new Date(seedAt-minutesAgo*60000);
+    return {by:'them',text,title:demoMailTitle(text),time:date.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false}),ts:date.getTime(),read:false};
+  };
+  // Example letters from Yume herself, shown in the Sent folder as separate mail.
+  const seededSentMail=(text,minutesAgo)=>{
+    const date=new Date(seedAt-minutesAgo*60000);
+    return {by:'mine',text,title:demoMailTitle(text),time:date.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false}),ts:date.getTime(),read:true};
+  };
+  const sampleSentLetters = {
+    rola:[
+      seededSentMail('같이 연습하자, 로라!',38),
+      seededSentMail('응! 같이 라이브 하자!',29)
+    ],
+    koharu:[
+      seededSentMail('코하루 쨩! 오늘 드레스 완성본이 나오는 날이지?',22),
+      seededSentMail('완성된 드레스, 나도 정말 기대돼!',18)
+    ],
+    mahiru:[
+      seededSentMail('마히루 쨩! 스타일링에 대해서 더 배우고 싶은데 시간 있어?',17),
+      seededSentMail('고마워, 마히루 쨩! 나 열심히 배울게!',13)
+    ],
+    ako:[
+      seededSentMail('아코 쨩, 연기 연습 도와주라..!',11),
+      seededSentMail('아코 쨩! 오늘 연습도 잘 부탁해!',9)
+    ]
+  };
+  const defaultChats = {
+    rola:[...sampleSentLetters.rola,seededMail(contacts.rola.lines[0],23),seededMail(contacts.rola.lines[1],19)],
+    koharu:[...sampleSentLetters.koharu,seededMail(contacts.koharu.lines[1],16)],
+    mahiru:[...sampleSentLetters.mahiru,seededMail(contacts.mahiru.lines[0],12)],
+    ako:[...sampleSentLetters.ako,seededMail(contacts.ako.lines[1],8)]
+  };
+  // Fictional in-universe Kirakirain posts inspired by the fan topics supplied by the user.
+  // These are sample fan conversations, not quotations from the anime.
+  const defaultPosts = [
+    {
+      id:112,who:'fan_yuzu',name:'댄스별☆하루카',mark:'💃',type:'fan',badge:'팬',time:'오늘 12:40',
+      text:'유즈 쨩의 댄스 좋지 않았어? 💃✨ 오늘도 무대 위에서 정말 신나 보였어! 보고 있으면 나까지 춤추고 싶어진다니까♪',
+      art:'💃 🍊 ⭐',likes:63,liked:false,
+      comments:[
+        {name:'리듬별☆리나',text:'나도!! 유즈 쨩 춤은 보고 있으면 저절로 웃게 돼 ♡'},
+        {name:'오렌지팝',text:'동작 하나하나가 귀엽고 멋졌어! 다음 무대도 기대돼~'},
+        {name:'춤추는별',text:'그 부분 계속 돌려 보고 있어ㅎㅎ'}
+      ]
+    },
+    {
+      id:113,who:'fan_yume_cover',name:'별빛멜로디☆',mark:'🎵',type:'fan',badge:'팬',time:'오늘 12:22',
+      text:'유메 쨩이 이 노래 커버해 줬으면 좋겠어~! 🎤🌈 유메 쨩의 목소리로 들으면 어떤 느낌일까? 상상만 해도 설레!!',
+      art:'🎤 🌈 🎶',likes:71,liked:false,
+      comments:[
+        {name:'무지개별☆루미',text:'맞아!! 유메 쨩만의 느낌으로 불러 주면 정말 좋겠다!'},
+        {name:'라이브덕후☆린',text:'나도 듣고 싶어 ♡ 언젠가 무대에서 불러 줄까?'}
+      ]
+    },
+    {
+      id:114,who:'fan_lily_dress',name:'설꽃드레스☆',mark:'❄️',type:'fan',badge:'팬',time:'오늘 12:06',
+      text:'리리 쨩의 새로운 프리미엄 레어 드레스 발표가 있대! ❄️👗✨ 어떤 디자인일까? 벌써부터 너무 기대돼!!',
+      art:'❄️ 👗 ✨',likes:84,liked:false,
+      comments:[
+        {name:'드레스덕후☆모모',text:'리리 쨩 분위기랑 어울리는 우아한 드레스면 좋겠다!'},
+        {name:'눈꽃별',text:'새 드레스가 공개되는 날만 기다리고 있어 ♡'},
+        {name:'코디러버☆나나',text:'색감이랑 장식이 제일 궁금해!'}
+      ]
+    },
+    {
+      id:115,who:'fan_koharu_dress',name:'베리파르페☆미미',mark:'🍓',type:'fan',badge:'팬',time:'오늘 11:51',
+      text:'코하루 쨩의 레인보우 베리 파르페 옷이 너무 좋아! 🍓🌈💕 달콤한 색깔이랑 귀여운 장식까지 전부 내 취향이야!',
+      art:'🍓 🌈 🎀',likes:57,liked:false,
+      comments:[
+        {name:'딸기소다☆하루',text:'그치!! 코하루 쨩이 만드는 의상은 사랑스러워 ♡'},
+        {name:'리본별☆유이',text:'레인보우 베리 파르페 특유의 색 조합이 너무 예뻐~'},
+        {name:'달콤베리',text:'나도 저 의상 입어 보고 싶어!'}
+      ]
+    },
+    {
+      id:101,who:'fan_mio',name:'드라마별☆미오',mark:'🧜',type:'fan',badge:'팬',time:'오늘 11:32',
+      text:'오늘 아코 쨩의 드라마 《인어 이야기》 너무 재밌었지 않아? 🧜‍♀️💗 아코 쨩은 대체 누굴 고를까? 다음 이야기가 너무 궁금해!!',
+      art:'🧜‍♀️ 🎬 💗',likes:58,liked:false,
+      comments:[
+        {name:'냥냥☆아코팬',text:'맞아!! 마지막 장면에서 나도 모르게 소리 질렀어 ㅠㅠ'},
+        {name:'별사탕☆유이',text:'누굴 선택할지 전혀 모르겠어! 다음 화 빨리 보고 싶다♡'},
+        {name:'달빛조개',text:'아코 쨩 표정 연기도 정말 좋았어!'}
+      ]
+    },
+    {
+      id:102,who:'fan_nana',name:'코디러버☆나나',mark:'👗',type:'fan',badge:'팬',time:'오늘 11:09',
+      text:'마히루의 패션 타임 오늘도 좋았어~ ☀️👗 마히루는 색을 맞추는 감각이 정말 대단한 것 같아! 나도 따라 해 보고 싶어 ♡',
+      art:'☀️ 👗 ✨',likes:44,liked:false,
+      comments:[
+        {name:'패션별☆루루',text:'맞아! 설명 들으면 나도 코디를 잘할 수 있을 것 같아ㅎㅎ'},
+        {name:'반짝리본',text:'마히루가 고르는 소품은 늘 예뻐 💕'},
+        {name:'코디러버☆나나',text:'다음 패션 타임도 꼭 챙겨 볼 거야!'}
+      ]
+    },
+    {
+      id:103,who:'fan_s4',name:'S4직관소원☆',mark:'🎫',type:'fan',badge:'팬',time:'오늘 10:56',
+      text:'S4의 라이브 가고 싶다!! 🌟🎤 무대에서 반짝이는 S4를 직접 보면 얼마나 멋질까…! 다음 라이브는 꼭 보러 가고 싶어 💖',
+      art:'🎤 🌟 🎫',likes:76,liked:false,
+      comments:[
+        {name:'무지개별☆루미',text:'나도!! S4 라이브는 현장에서 보면 정말 감동일 것 같아!'},
+        {name:'별빛응원단',text:'응원봉 준비하고 기다리는 중 ✨'},
+        {name:'하늘색별',text:'우리 다 같이 갈 수 있으면 좋겠다!!'}
+      ]
+    },
+    {
+      id:104,who:'fan_akonyan',name:'냥냥☆아코팬',mark:'🐾',type:'fan',badge:'팬',time:'오늘 10:37',
+      text:'《인어 이야기》 보고 아코 쨩한테 또 반해 버렸어… 🐚💕 귀여운 모습도 좋지만 진지하게 연기할 때는 진짜 멋져! 아코 쨩 응원해!!',
+      art:'🐈 🐚 💗',likes:39,liked:false,
+      comments:[
+        {name:'드라마별☆미오',text:'나도! 오늘은 아코 쨩 연기만 눈에 들어왔어 ♡'},
+        {name:'분홍별☆모모',text:'다음 이야기 기다리는 게 너무 힘들어!'}
+      ]
+    },
+    {
+      id:105,who:'fan_duet',name:'무지개별☆루미',mark:'🌈',type:'fan',badge:'팬',time:'오늘 10:18',
+      text:'유메랑 로라가 같은 무대에 서면 진짜 최고지 않아? 🌈🎸 두 사람의 라이브를 또 보고 싶어! 노래할 때 서로 바라보는 모습이 너무 좋아 ♡',
+      art:'🌈 🎸 ⭐',likes:52,liked:false,
+      comments:[
+        {name:'딸기소다☆하루',text:'두 사람의 에너지 정말 좋아!'},
+        {name:'라이브덕후☆린',text:'맞아! 다음엔 어떤 무대를 보여줄까?'}
+      ]
+    },
+    {
+      id:106,who:'mahiru',name:'카스미 마히루',mark:'☀️',type:'idol',badge:'아이돌',time:'오늘 09:42',
+      text:'오늘도 패션 이야기에 관심 가져 줘서 고마워. ☀️ 자신에게 잘 어울리는 스타일을 찾아가는 것도 즐거운 일이야. 모두 즐겁게 코디해 봐!',
+      art:'☀️ 👗 ✨',likes:66,liked:false,
+      comments:[
+        {name:'코디러버☆나나',text:'마히루! 오늘 패션 타임도 너무 좋았어 💗'},
+        {name:'별사탕☆유이',text:'다음에도 스타일링 이야기 들려줘!'}
+      ]
+    },
+    {
+      id:107,who:'fan_dress',name:'딸기소다☆하루',mark:'🍓',type:'fan',badge:'팬',time:'오늘 09:20',
+      text:'유메의 새로운 드레스 너무 반짝반짝했어! 👗✨ 별 장식이랑 색 조합이 완전 취향이야. 다들 어떤 드레스가 제일 좋아?',
+      art:'👗 🌈 ✨',likes:27,liked:false,
+      comments:[
+        {name:'드레스덕후☆모모',text:'나는 별이 달린 드레스가 좋아!'},
+        {name:'무지개별☆루미',text:'유메한테 진짜 잘 어울렸어 ♡'}
+      ]
+    },
+    {
+      id:108,who:'ako',name:'사오토메 아코',mark:'🐈',type:'idol',badge:'아이돌',time:'오늘 08:45',
+      text:'드라마를 재미있게 봐 주셨다고요? 후훗, 당연하죠! 🎬 다음 이야기도 기대하셔도 좋답니다! 하지만 결말은 아직 비밀이에요♪',
+      art:'🐈 🎬 💗',likes:91,liked:false,
+      comments:[
+        {name:'냥냥☆아코팬',text:'아코 쨩!! 진짜 최고였어!!'},
+        {name:'드라마별☆미오',text:'결말 힌트 한 개만 주세요~ ㅠㅠ'},
+        {name:'S4직관소원☆',text:'다음 화 본방사수할게요 ♡'}
+      ]
+    },
+    {
+      id:109,who:'yotsuboshi_official',name:'四星学園 公式',mark:'🏫',type:'official',badge:'공식',time:'어제 19:30',
+      text:'【四星学園】 라이브와 학원 소식은 공식 안내를 확인해 주세요. 학생들과 아이돌들에게 보내 주시는 응원에 감사드립니다 ✧',
+      art:'🏫 🌟 📣',likes:42,liked:false,
+      comments:[
+        {name:'S4직관소원☆',text:'다음 S4 라이브 소식 기다릴게요! 🌟'},
+        {name:'별빛응원단',text:'항상 응원하고 있어요!'}
+      ]
+    },
+    {
+      id:110,who:'yume',name:'니지노 유메',mark:'🌈',type:'idol',badge:'아이돌',time:'어제 18:05',
+      text:'모두의 응원 덕분에 오늘도 힘이 났어! 🌈✨ 내일도 열심히 아이카츠 할게. 다 함께 반짝반짝 빛나자!',
+      art:'🌈 💗 ⭐',likes:63,liked:false,
+      comments:[
+        {name:'무지개별☆루미',text:'유메! 언제나 응원할게!!'},
+        {name:'딸기소다☆하루',text:'다음 라이브도 기대하고 있어 ♡'}
+      ]
+    },
+    {
+      id:111,who:'rola',name:'사쿠라바 로라',mark:'🎸',type:'idol',badge:'아이돌',time:'어제 16:40',
+      text:'다음 라이브를 위해 연습 중이야. 🎸 유메한테도 지지 않을 거니까! 모두 기대해 줘!',
+      art:'🎸 ⭐ 💜',likes:49,liked:false,
+      comments:[
+        {name:'라이브덕후☆린',text:'로라 무대 또 보고 싶어!'},
+        {name:'무지개별☆루미',text:'유메랑 같이 무대 서 줘~ ✨'}
+      ]
+    }
+  ];
+  function readStored(){try{const val=JSON.parse(localStorage.getItem(KEY)||'null');return val&&typeof val==='object'?val:{};}catch(e){return {};}}
+  const saved=readStored();
+  const hasStoredChats=saved.chats&&typeof saved.chats==='object'&&!Array.isArray(saved.chats);
+  const userChats=hasStoredChats?saved.chats:structuredClone(defaultChats);
+  // Upgrade older saved sessions without losing letters the user has already sent or received.
+  for(const id of contactOrder){
+    if(!Array.isArray(userChats[id]))userChats[id]=structuredClone(defaultChats[id]);
+  }
+  const shouldMigrate=hasStoredChats&&saved.characterScriptVersion!==2;
+  if(shouldMigrate){
+    contactOrder.forEach((id,i)=>{
+      const sample=defaultChats[id].find(m=>m.by==='them');
+      if(!userChats[id].some(m=>m&&m.by==='them'&&m.text===sample.text)){
+        userChats[id].push({...sample,ts:Date.now()+i+1,read:false,time:'NEW'});
+      }
+    });
+  }
+  const state={app:'home',thread:null,mailMode:'detail',mailIndex:0,mailFolder:'received',mailDraftTo:'rola',phoneMode:'contacts',dial:'',call:null,callTime:0,cameraMode:'camera',facing:'environment',liveCamera:false,posts:Array.isArray(saved.posts)?saved.posts:structuredClone(defaultPosts),chats:userChats,photos:Array.isArray(saved.photos)?saved.photos:[],noticeSeen:false,previewPhoto:null,autoCursor:Number.isInteger(saved.autoCursor)?saved.autoCursor:0,kiraFilter:'all',kiraComposeOpen:false,mailDraftTitle:'',mailPopupSender:null};
+  let stream=null,callTimer=null,toastTimer=null,popupTimer=null;
+  ensureSentExamples();
+  ensureCommunitySeedPosts();
+  const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const stamp=()=>new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});
+  function persist(){try{localStorage.setItem(KEY,JSON.stringify({posts:state.posts,chats:state.chats,photos:state.photos,autoCursor:state.autoCursor,characterScriptVersion:2,communityUiVersion:3,communityContentVersion:5,sentSampleVersion:1}));}catch(e){if(e && e.name==='QuotaExceededError')flash('저장 공간이 부족해서 일부 사진이 저장되지 않았어요.');}}
+  function ensureSentExamples(){
+    if(saved.sentSampleVersion===1)return;
+    let added=false;
+    for(const id of contactOrder){
+      state.chats[id]??=[];
+      for(const example of sampleSentLetters[id]){
+        if(!state.chats[id].some(mail=>mail && mail.by==='mine' && mail.text===example.text)){
+          state.chats[id].push({...example});
+          added=true;
+        }
+      }
+    }
+    if(added || saved.sentSampleVersion!==1)persist();
+  }
+  function ensureCommunitySeedPosts(){
+    // Append new fan topics to existing visitors' timelines without resetting
+    // likes, replies, or user-created posts from previous website versions.
+    if(saved.communityContentVersion===5)return;
+    if(!Array.isArray(saved.posts)){
+      // First visit: state.posts already includes all current default posts.
+      persist();
+      return;
+    }
+    const legacyIds=new Set([1,2,3,4,5,6,7,8]);
+    const seedIds=new Set(defaultPosts.map(p=>p.id));
+    const userPosts=state.posts.filter(p=>p && !legacyIds.has(Number(p.id)) && !seedIds.has(Number(p.id)));
+    const previousSeeds=new Map(state.posts.filter(p=>p && seedIds.has(Number(p.id))).map(p=>[Number(p.id),p]));
+    const mergedSeeds=defaultPosts.map(seed=>{
+      const existing=previousSeeds.get(seed.id);
+      // Preserve the complete original post, including the visitor's likes
+      // and any comments they have added, when that seed already exists.
+      return existing ? {...structuredClone(seed),...existing} : structuredClone(seed);
+    });
+    // First-time migration from the original generic feed (IDs 1-8).
+    // Keep user replies to those sample posts instead of discarding them.
+    const targetIds={1:110,2:105,3:111,4:107,5:109,6:106,7:103,8:109};
+    const originalCommentCounts={1:2,2:1,3:1,4:2,5:1,6:0,7:1,8:2};
+    for(const previous of state.posts){
+      const id=Number(previous?.id);
+      if(!legacyIds.has(id))continue;
+      const target=mergedSeeds.find(p=>p.id===targetIds[id]);
+      if(!target)continue;
+      const extra=(Array.isArray(previous.comments)?previous.comments:[]).slice(originalCommentCounts[id]);
+      target.comments.push(...extra);
+      if(previous.liked && !target.liked){target.liked=true;target.likes+=1;}
+    }
+    state.posts=[...userPosts,...mergedSeeds];
+    persist();
+  }
+  if(shouldMigrate)persist();
+  function flash(msg){const el=$('#toast');clearTimeout(toastTimer);el.textContent=msg;el.hidden=false;toastTimer=setTimeout(()=>{el.hidden=true},2600);}
+  function showMailPopup(sender){
+    clearTimeout(popupTimer);
+    state.mailPopupSender=sender;
+    view.querySelectorAll('.stitch-popup-wrap').forEach(el=>el.remove());
+    if(state.app==='home'){
+      renderHome();
+    }else{
+      view.insertAdjacentHTML('beforeend',mailPopupMarkup(sender,{overlay:true}));
+    }
+    popupTimer=setTimeout(()=>{
+      state.mailPopupSender=null;
+      view.querySelectorAll('.stitch-popup-wrap').forEach(el=>el.remove());
+    },2600);
+  }
+  function clearMailPopup(){clearTimeout(popupTimer);state.mailPopupSender=null;view.querySelectorAll('.stitch-popup-wrap').forEach(el=>el.remove());}
+  function header(title){return `<div class="app-header"><button class="back-btn" data-app="home" aria-label="홈으로 돌아가기">◀ HOME</button><span class="h-title">${title}</span></div>`;}
+  function navigate(to){
+    if(!['home','camera','phone','messages','kira'].includes(to))return;
+    if(state.app==='camera'&&to!=='camera')stopCamera();
+    if(state.app==='phone'&&to!=='phone'&&state.call)endCall(false);
+    state.app=to;state.thread=null;state.previewPhoto=null;
+    if(to==='messages'){state.mailMode='inbox';state.mailFolder='received';state.mailIndex=0;}
+    if(to==='camera')state.cameraMode='camera';
+    if(to==='kira'&&!state.noticeSeen){state.noticeSeen=true;}
+    render();
+  }
+  const cameraIcon=`<svg viewBox="0 0 32 32"><rect x="3" y="9" width="26" height="18" rx="4"/><path d="M10 9L12 5H20L22 9"/><circle cx="16" cy="18" r="5"/><path d="M25 13h1"/></svg>`;
+  const messageIcon=`<svg viewBox="0 0 32 32"><path d="M6 7Q3 7 3 12V20Q3 25 8 25H11L16 29L20 25H24Q29 25 29 20V12Q29 7 24 7Z"/><path d="M16 21C5 14 10 10 16 14C22 10 27 14 16 21Z" fill="currentColor" stroke="none"/></svg>`;
+  const phoneIcon=`<svg viewBox="0 0 32 32"><path d="M9 5C8 4 6 5 5 7C1 13 9 23 17 27C21 29 26 27 27 24C27 23 21 19 19 20L16 23C12 21 10 18 9 15L12 12Z"/></svg>`;
+  const socialIcon=`<svg viewBox="0 0 32 32"><path d="M3 3h10v10H3zM19 3h10v10H19zM3 19h10v10H3zM19 19h4v4h-4zM26 19h3v3h-3zM19 26h4v3h-4zM26 25h3v4h-3z"/><path d="M6 6h4v4H6zM22 6h4v4h-4zM6 22h4v4H6z"/></svg>`;
+  const origamiSVG=`<svg viewBox="0 0 150 150" aria-hidden="true"><defs><linearGradient id="goldstar" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffaad"/><stop offset=".45" stop-color="#ffd52f"/><stop offset="1" stop-color="#f6b725"/></linearGradient></defs><polygon points="75,2 94,53 147,57 105,89 119,144 75,112 29,144 44,89 3,57 55,53" fill="url(#goldstar)" stroke="#f9eaa0" stroke-width="4"/><path d="M75 2L75 84L94 53Z" fill="#fff2a1"/><path d="M75 84L147 57L105 89Z" fill="#f3b52b"/><path d="M75 84L119 144L75 112Z" fill="#fff3a7"/><path d="M75 84L29 144L44 89Z" fill="#e3a92e"/><path d="M75 84L3 57L55 53Z" fill="#ffe87a"/><path d="M75 2L55 53L75 84" fill="#ffed86"/><path d="M75 84L94 53L147 57" fill="#fff8c5" opacity=".55"/><path d="M75 84L105 89L119 144" fill="#ffdc50"/></svg>`;
+  const fancySVG=`<svg viewBox="0 0 150 150" aria-hidden="true"><polygon points="75,4 93,53 146,55 104,87 118,141 75,109 32,141 46,87 4,55 57,53" fill="#eb419d" stroke="#ffd85b" stroke-width="7"/><polygon points="75,18 89,61 131,63 97,87 109,125 75,101 41,125 53,87 19,63 61,61" fill="#ff6dbc" stroke="#fff1a2" stroke-width="2"/><text x="75" y="99" text-anchor="middle" fill="#ffea78" font-family="Georgia,serif" font-weight="bold" font-size="54">S</text><path d="M42 76C26 55 44 47 54 63 M96 99C117 116 128 87 108 80" fill="none" stroke="#ffe57a" stroke-width="4" stroke-linecap="round"/><circle cx="45" cy="71" r="3" fill="#fff2b7"/><circle cx="109" cy="84" r="3" fill="#fff2b7"/></svg>`;
+  function allLetters(){
+    return contactOrder.flatMap(id=>(state.chats[id]||[]).map((m,idx)=>({id,m,idx}))).sort((a,b)=>(b.m.ts||0)-(a.m.ts||0));
+  }
+  function unreadLetters(){return allLetters().filter(({m})=>m.by==='them'&&!m.read);}
+
+  const stitchGoldStar = `<svg class="stitch-star-svg" viewbox="0 0 100 100">
+<defs>
+<linearGradient id="starFacetLight" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#FFFAD2"></stop>
+<stop offset="100%" stop-color="#FFD427"></stop>
+</linearGradient>
+<linearGradient id="starFacetDark" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#E8A904"></stop>
+<stop offset="100%" stop-color="#B87700"></stop>
+</linearGradient>
+</defs>
+<!-- 3D Beveled Star Facets -->
+<polygon fill="url(#starFacetLight)" points="50,5 64,36 50,50"></polygon>
+<polygon fill="url(#starFacetDark)" points="50,5 50,50 36,36"></polygon>
+<polygon fill="url(#starFacetLight)" points="98,36 67,58 50,50"></polygon>
+<polygon fill="url(#starFacetDark)" points="98,36 50,50 64,36"></polygon>
+<polygon fill="url(#starFacetLight)" points="79,92 50,70 50,50"></polygon>
+<polygon fill="url(#starFacetDark)" points="79,92 50,50 67,58"></polygon>
+<polygon fill="url(#starFacetLight)" points="21,92 33,58 50,50"></polygon>
+<polygon fill="url(#starFacetDark)" points="21,92 50,50 50,70"></polygon>
+<polygon fill="url(#starFacetLight)" points="2,36 36,36 50,50"></polygon>
+<polygon fill="url(#starFacetDark)" points="2,36 50,50 33,58"></polygon>
+</svg>`;
+  const stitchSmallGoldStar = `<svg class="stitch-star-svg" viewbox="0 0 100 100">
+<polygon fill="url(#starFacetLight)" points="50,5 64,36 50,50"></polygon>
+<polygon fill="url(#starFacetDark)" points="50,5 50,50 36,36"></polygon>
+<polygon fill="url(#starFacetLight)" points="98,36 67,58 50,50"></polygon>
+<polygon fill="url(#starFacetDark)" points="98,36 50,50 64,36"></polygon>
+<polygon fill="url(#starFacetLight)" points="79,92 50,70 50,50"></polygon>
+<polygon fill="url(#starFacetDark)" points="79,92 50,50 67,58"></polygon>
+<polygon fill="url(#starFacetLight)" points="21,92 33,58 50,50"></polygon>
+<polygon fill="url(#starFacetDark)" points="21,92 50,50 50,70"></polygon>
+<polygon fill="url(#starFacetLight)" points="2,36 36,36 50,50"></polygon>
+<polygon fill="url(#starFacetDark)" points="2,36 50,50 33,58"></polygon>
+</svg>`;
+  const stitchTinyStar = `<svg class="stitch-tiny-svg" viewbox="0 0 24 24">
+<polygon points="12,2 15,9 23,9 17,14 19,22 12,17 5,22 7,14 1,9 9,9"></polygon>
+</svg>`;
+  const stitchPinkStar = `<svg class="stitch-pink-svg" viewbox="0 0 140 140">
+<defs>
+<!-- Star Outlines & Arabesque Fill Gradients -->
+<linearGradient id="aikatsuStarBorder" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#FFF7AA"></stop>
+<stop offset="50%" stop-color="#FFCF10"></stop>
+<stop offset="100%" stop-color="#B87C00"></stop>
+</linearGradient>
+<radialGradient cx="50%" cy="50%" id="starBodyGrad" r="50%">
+<stop offset="0%" stop-color="#FF3896"></stop>
+<stop offset="70%" stop-color="#E5006D"></stop>
+<stop offset="100%" stop-color="#B80054"></stop>
+</radialGradient>
+</defs>
+<!-- Golden Thick Outer Star Border -->
+<polygon fill="url(#starBodyGrad)" points="70,8 89,48 133,52 100,83 110,126 70,103 30,126 40,83 7,52 51,48" stroke="url(#aikatsuStarBorder)" stroke-linejoin="round" stroke-width="6.5"></polygon>
+<!-- Secondary Inner Gold Stroke -->
+<polygon fill="none" points="70,14 87,50 125,54 96,81 104,119 70,99 36,119 44,81 15,54 53,50" stroke="#FFEAA3" stroke-linejoin="round" stroke-width="1.5"></polygon>
+<!-- Gold Arabesque Filigree Swirls in Heart Pattern -->
+<!-- Left Scroll / Heart Half -->
+<path d="M70,42 C56,36 44,48 48,64 C51,76 68,84 70,92" fill="none" stroke="#FFEA8A" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="47" cy="62" fill="#FFF2AD" r="2.5"></circle>
+<!-- Right Scroll / Heart Half -->
+<path d="M70,42 C84,36 96,48 92,64 C89,76 72,84 70,92" fill="none" stroke="#FFEA8A" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="93" cy="62" fill="#FFF2AD" r="2.5"></circle>
+<!-- Center Heart & Diamond Accents -->
+<path d="M70,55 C66,51 61,54 61,59 C61,66 70,72 70,72 C70,72 79,66 79,59 C79,54 74,51 70,55 Z" fill="#FFE799"></path>
+<circle cx="70" cy="94" fill="#FFFFFF" r="2"></circle>
+<circle cx="70" cy="38" fill="#FFFFFF" r="2.5"></circle>
+</svg>`;
+  const stitchMailIcon = `<svg viewBox="0 0 40 36" aria-hidden="true"><path d="M12 6C16 2 24 2 28 6C34 6 38 12 37 18C36 24 31 28 26 28C23 28 22 30 20 33C18 30 16 28 14 28C8 28 3 24 3 18C2 11 6 6 12 6Z" fill="white" stroke="#6e1584" stroke-width="2.5"/><path d="M20 13C18.5 10.5 15 10.5 13.5 12.5C11.5 15 14 19 20 22C26 19 28.5 15 26.5 12.5C25 10.5 21.5 10.5 20 13Z" fill="#ff0f7d" stroke="none"/></svg>`;
+  const stitchCameraIcon = `<svg viewBox="0 0 36 36" aria-hidden="true"><rect x="6" y="12" width="24" height="18" rx="5" fill="white" stroke="white"/><rect x="11" y="9" width="10" height="5" rx="2" fill="white" stroke="none"/><circle cx="18" cy="21" r="7" fill="#82259c" stroke="white" stroke-width="1"/><circle cx="18" cy="21" r="3" fill="white" stroke="none"/><circle cx="27" cy="16" r="2" fill="#fa4b9e" stroke="none"/></svg>`;
+  const stitchPhoneIcon = `<svg viewBox="0 0 36 36" aria-hidden="true"><path d="M12 6C10 4 8 6 7 8C2 16 14 29 24 29C28 29 31 23 29 22L22 18C21 18 19 20 18 21C14 19 12 17 11 13C14 11 14 10 12 6Z" fill="white" stroke="#fcffff" stroke-width="2"/></svg>`;
+  const stitchQrIcon = `<svg viewBox="0 0 36 36" aria-hidden="true"><path d="M5 5h10v10H5zM21 5h10v10H21zM5 21h10v10H5z" stroke="white" fill="none" stroke-width="2.6"/><path d="M8 8h4v4H8zM24 8h4v4H24zM8 24h4v4H8zM21 21h5v5h-5zM29 21h2v4h-2zM23 29h3v3h-3zM29 29h3v3h-3z" stroke="none" fill="white"/></svg>`;
+  function mailPopupMarkup(letterId,{overlay=false,fallback=false}={}){
+    const friend=letterId&&contacts[letterId]?contacts[letterId]:null;
+    const wrapClass=`stitch-popup-wrap${overlay?' overlay':''}`;
+    if(friend){
+      return `<div class="${wrapClass}"><div class="stitch-popup" role="button" tabindex="0" data-action="open-thread" data-id="${letterId}" aria-label="${safe(friend.name)}의 새 편지 열기"><div class="stars-top"><span>★</span><span>★</span></div><div class="popup-sender">${safe(friend.jp)}より <span aria-hidden="true">✨</span></div><div class="popup-msg">新着メッセージがあります。</div><button class="popup-open" type="button" data-action="open-thread" data-id="${letterId}" aria-label="편지 열기"><span class="popup-envelope"></span></button><div class="stars-bottom"><span>★</span><span>★</span></div></div></div>`;
+    }
+    if(fallback){
+      return `<div class="${wrapClass}"><div class="stitch-popup" role="button" tabindex="0" data-app="messages" aria-label="메시지 앱 열기"><div class="stars-top"><span>★</span><span>★</span></div><div class="popup-sender">メッセージ <span aria-hidden="true">✨</span></div><div class="popup-msg">新着メッセージがあります。</div><button class="popup-open" type="button" data-app="messages" aria-label="편지 열기"><span class="popup-envelope"></span></button><div class="stars-bottom"><span>★</span><span>★</span></div></div></div>`;
+    }
+    return '';
+  }
+  function renderHome(){
+    const unread=unreadLetters();
+    const popup=state.mailPopupSender?mailPopupMarkup(state.mailPopupSender,{fallback:true}):'';
+    view.innerHTML=`<div class="stitch-home">
+      <span class="stitch-sparkle a">✦</span><span class="stitch-sparkle b">✧</span><span class="stitch-sparkle c">✦</span><span class="stitch-sparkle d">✧</span>
+      <div class="stitch-stars">
+        <div class="stitch-gold-star">${stitchGoldStar}</div>
+        <div class="stitch-small-star">${stitchSmallGoldStar}</div>
+        <div class="stitch-tiny-star">${stitchTinyStar}</div>
+        <button type="button" class="stitch-pink-star" data-app="phone" aria-label="電話アプリを開く">${stitchPinkStar}</button>
+      </div>
+      ${popup}
+      <nav class="home-apps stitch-dock" aria-label="앱 선택">
+        <button class="home-launcher" data-app="camera"><span class="icon-tile stitch-camera">${stitchCameraIcon}</span>カメラ</button>
+        <button class="home-launcher" data-app="messages"><span class="icon-tile stitch-mail">${stitchMailIcon}${unread.length?`<span class="app-unread-badge">${Math.min(unread.length,9)}${unread.length>9?'+':''}</span>`:''}</span>メッセージ</button>
+        <button class="home-launcher" data-app="phone"><span class="icon-tile stitch-phone">${stitchPhoneIcon}</span>電話</button>
+        <button class="home-launcher" data-app="kira"><span class="icon-tile stitch-kira">${stitchQrIcon}</span>キラキライン</button>
+      </nav>
+    </div>`;
+  }
+  function avatar(id){const c=contacts[id]||{mark:'🌈',cls:'av-yume'};return `<span class="avatar ${c.cls}">${c.mark}</span>`;}
+  // D-Mail messages show From / Title / body like the supplied Stitch reference.
+  // Earlier saved letters without a title remain readable (shown as "No title").
+  function displayMailTitle(m){return typeof m?.title==='string' && m.title.trim() ? m.title.trim() : 'No title';}
+  function demoMailTitle(text){
+    const body=String(text||'');
+    if(/드레스|파르페|시착/.test(body))return '드레스 이야기';
+    if(/스타일링|코디/.test(body))return '스타일링 레슨';
+    if(/연기|대사/.test(body))return '연기 연습';
+    if(/라이브|무대|노래/.test(body))return '다음 라이브';
+    if(/머핀|초코/.test(body))return '초코 머핀';
+    if(/일정|시간|만나/.test(body))return '오늘의 일정';
+    return 'No title';
+  }
+  function lastIncomingIndex(id){
+    const list=state.chats[id]||[];
+    for(let i=list.length-1;i>=0;i--)if(list[i]?.by==='them')return i;
+    return list.length?list.length-1:0;
+  }
+  function mailAppbar(){const inInbox=state.mailMode==='inbox';return `<div class="letter-topbar"><button type="button" ${inInbox?'data-app="home" aria-label="홈으로 돌아가기"':'data-action="mail-inbox" aria-label="편지함으로 돌아가기"'}>‹</button><strong>✧ メッセージ ✧</strong><span class="letter-title-mark">✉</span><button type="button" data-action="mail-compose" aria-label="새 메시지 쓰기">✎</button></div>`;}
+  function showMail(id,idx){
+    if(!contacts[id]||!(state.chats[id]||[])[idx])return;
+    state.thread=id;state.mailIndex=idx;state.mailMode='detail';
+    const item=state.chats[id][idx];
+    if(item.by==='them'&&!item.read){item.read=true;persist();}
+    renderMessages();
+  }
+  function renderMessages(){
+    if(state.mailMode==='inbox'){
+      const folder=state.mailFolder;
+      const all=Object.entries(contacts).flatMap(([id,c])=>(state.chats[id]||[]).map((m,idx)=>({id,c,m,idx})))
+        .filter(item=>folder==='sent'?item.m.by==='mine':item.m.by==='them')
+        .sort((a,b)=>(b.m.ts||0)-(a.m.ts||0));
+      const rows=all.map(({id,c,m,idx})=>`<button class="letter-item ${m.by==='them'&&!m.read?'mail-unread':''}" data-action="mail-open" data-id="${id}" data-index="${idx}"><span class="mail-seal">${c.mark}</span><span class="mail-copy"><strong>${safe(m.by==='mine'?'받는 사람: '+c.name:'보낸 사람: '+c.name)} ${m.by==='them'&&!m.read?'<em class="new-mail-mark">NEW</em>':''}</strong><span class="letter-list-subject">Title: ${safe(displayMailTitle(m))}</span><span class="letter-list-excerpt">${safe(m.text)}</span></span><time>${safe(m.time||'')}</time></button>`).join('');
+      const totalUnread=unreadLetters().length;
+      view.innerHTML=`<div class="letter-ui">${mailAppbar()}<div class="letter-inbox-tabs"><button class="${folder==='received'?'selected':''}" data-action="mail-folder" data-folder="received">💌 받은 편지 ${totalUnread?`(${totalUnread})`:''}</button><button class="${folder==='sent'?'selected':''}" data-action="mail-folder" data-folder="sent">✉ 보낸 편지</button></div><div class="letter-scroll"><div class="letter-inbox-head"><span>✧ ${folder==='sent'?'보낸 편지함':'받은 편지함'} ✧</span><button data-action="receive-message" type="button" aria-label="새 편지 도착시키기">✉ 새 편지 받기</button></div><div class="letter-list">${rows||'<div class="letter-empty">아직 편지가 없어요 ✧</div>'}</div></div></div>`;
+      return;
+    }
+    if(state.mailMode==='compose'){
+      const options=Object.entries(contacts).map(([id,c])=>`<option value="${id}" ${id===state.mailDraftTo?'selected':''}>${safe(c.name)}</option>`).join('');
+      view.innerHTML=`<div class="letter-ui">${mailAppbar()}<form id="mailForm" class="letter-scroll" style="display:flex;flex-direction:column"><div class="letter-compose-paper"><div class="mail-input-heading">✧ SPECIAL STAR MESSAGE ✧</div><label><span class="letter-label">To<small>수신인</small></span><select name="recipient" aria-label="수신인">${options}</select></label><label><span class="letter-label">From<small>발신인</small></span><input readonly value="니지노 유메" aria-label="발신인"></label><label class="mail-ref-compose-title"><span class="letter-label">Title<small>제목</small></span><input name="title" aria-label="편지 제목" maxlength="80" placeholder="No title" value="${safe(state.mailDraftTitle)}"></label><div class="letter-body-label"><span class="letter-label">Message<small>내용</small></span>마음을 담아 편지를 보내요 ♡</div><textarea name="message" aria-label="메시지 내용" maxlength="400" required placeholder="반짝이는 마음을 전해 보세요! ✨"></textarea><div class="letter-fancy-footer">✦ ❀ ✦ 🎀 ✦ ❀ ✦</div></div></form><div class="letter-actions"><button data-action="mail-inbox">‹ 취소</button><button class="pink" type="submit" form="mailForm">✉ 보내기</button></div></div>`;
+      return;
+    }
+    const id=contacts[state.thread]?state.thread:'rola';
+    const messages=state.chats[id]||[];
+    const idx=messages[state.mailIndex]?state.mailIndex:lastIncomingIndex(id);
+    const m=messages[idx]||{by:'them',text:'새로운 메시지가 없어요.',time:''};
+    const c=contacts[id];
+    const from=m.by==='mine'?'니지노 유메':c.name;
+    const fromJapanese=m.by==='mine'?'虹野ゆめ':c.jp;
+    const folderLabel=m.by==='mine'?'送信メール (D-Mail)':'受信メール (D-Mail)';
+    const sendInfo=m.by==='mine'?` · To: ${safe(c.name)}`:'';
+    const trashIcon=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>`;
+    const replyIcon=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>`;
+    view.innerHTML=`<div class="letter-ui is-detail">${mailAppbar()}<div class="letter-scroll mail-ref-scroll"><div class="mail-ref-subnav"><button class="mail-ref-back" data-action="mail-inbox" type="button">◀ もどる</button><span class="mail-ref-state">${folderLabel}</span></div><article class="mail-ref-card" aria-label="${safe(from)}의 편지"><div class="mail-ref-meta"><div class="mail-ref-row"><span class="mail-ref-label">From</span><div class="mail-ref-person"><strong>${safe(from)}</strong><small>${safe(fromJapanese)}</small></div></div><div class="mail-ref-row"><span class="mail-ref-label title">Title</span><span class="mail-ref-title">${safe(displayMailTitle(m))}</span></div></div><div class="mail-ref-body"><div class="mail-ref-divider"></div><p class="mail-ref-message">${safe(m.text)}</p><div class="mail-ref-date">${safe(m.time||'')} · STAR MAIL${sendInfo}</div></div><div class="mail-ref-actions"><span class="mail-ref-stamp">✉ AIKATSU MAIL</span><span class="mail-ref-buttons"><button type="button" data-action="mail-delete" aria-label="현재 편지 삭제" title="편지 삭제">${trashIcon}</button><button type="button" data-action="mail-reply" aria-label="답장 또는 다시 쓰기" title="답장 쓰기">${replyIcon}</button></span></div></article><div class="letter-fancy-footer" aria-hidden="true">✧ ☆ ✧</div></div></div>`;
+  }
+  const callPhoneSVG=`<svg viewBox="0 0 32 32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M10.2 3.9c-1.1-1.1-2.7-.8-3.5.6l-2.4 4.3c-1.8 3.4 1.8 10.9 7.2 16.2 5.3 5.3 12.8 8.8 16.3 7l4.3-2.4c1.4-.8 1.7-2.4.6-3.5l-4.2-4.2c-.8-.8-2.1-.8-3 0l-2.3 2.4c-3.4-1.7-5.8-4.1-7.5-7.5l2.4-2.3c.8-.9.8-2.1 0-3z"/></svg>`;
+  const callRomaji = {rola:'Sakuraba Rola',koharu:'Nanakura Koharu',mahiru:'Kasumi Mahiru',ako:'Saotome Ako'};
+  const callHeartEmblem = `<svg viewBox="0 0 160 160" aria-hidden="true"><defs><linearGradient id="callHeart" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff8ecd"/><stop offset="1" stop-color="#f45aa7"/></linearGradient></defs><path d="M80 15L91 69 145 80 91 91 80 145 69 91 15 80 69 69Z" fill="#fff" opacity=".83"/><path d="M80 100C69 91 58 85 58 73C58 60 73 57 80 68C87 57 102 60 102 73C102 85 91 91 80 100Z" fill="url(#callHeart)"/></svg>`;
+  const callIcons = {
+    mic:`<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M8 21h8"/></svg>`,
+    keypad:`<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor" stroke="none"><circle cx="5" cy="5" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></g></svg>`,
+    speaker:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h4l5-4v12l-5-4H3zM16 9a4 4 0 0 1 0 6M18 6a8 8 0 0 1 0 12"/></svg>`,
+    memo:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 17-1 4 4-1L21 6l-4-4zM15 4l4 4"/></svg>`
+  };
+  function callTool(action,icon,label,active){return `<button type="button" class="stitch-call-tool ${active?'active':''}" data-action="${action}" aria-pressed="${active?'true':'false'}" aria-label="${label}"><span class="stitch-call-tool-icon">${callIcons[icon]}</span><span>${label}</span></button>`;}
+  function renderCallStage(){
+    const call=state.call;
+    if(!call)return;
+    const c=contacts[call.contact];
+    const incoming=call.phase==='incoming';
+    const dialing=call.phase==='dialing';
+    const name=safe(c?.jp||call.name);
+    const roman=safe(callRomaji[call.contact]||'STAR FRIEND');
+    const status=incoming?'着信中':dialing?'発信中':'通話中';
+    const statusMarkup=incoming?'<span class="incoming-label">INCOMING CALL</span>':dialing?'<span class="incoming-label">CALLING...</span>':'';
+    const timeMarkup=call.phase==='connected'?`<span class="stitch-call-time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l4 2"/></svg><span id="callDuration">${duration(state.callTime)}</span></span>`:'';
+    const tools=call.phase==='connected'
+      ? `<div class="stitch-call-tools">${callTool('toggle-call-mute','mic','ミュート',!!call.muted)}${callTool('toggle-call-keypad','keypad','キーパッド',!!call.keypadOpen)}${callTool('toggle-call-speaker','speaker','スピーカー',!!call.speaker)}${callTool('toggle-call-memo','memo','通話メモ',!!call.memoOpen)}</div>`:'';
+    const buttons=incoming
+      ? `<div class="stitch-call-actions"><div class="stitch-call-action"><button type="button" class="stitch-call-circle reject" data-action="reject-call" aria-label="着信を拒否">${callPhoneSVG}</button><span>拒否</span></div><div class="stitch-call-action"><button type="button" class="stitch-call-circle accept" data-action="accept-call" aria-label="電話に応答">${callPhoneSVG}</button><span>応答</span></div></div><p class="stitch-call-ready"><span>♥</span> CONNECTED READY</p>`
+      : `${tools}<div class="stitch-call-action stitch-call-end"><button type="button" class="stitch-call-circle end" data-action="hangup" aria-label="通話を終了">${callPhoneSVG}</button><span>${dialing?'発信中':'通話終了'}</span></div>`;
+    let flyout='';
+    if(call.phase==='connected'&&call.keypadOpen){
+      const keys=['1','2','3','4','5','6','7','8','9','*','0','#'].map(x=>`<button data-action="call-keypress" data-value="${x}" aria-label="${x}">${x}</button>`).join('');
+      flyout=`<div class="stitch-call-flyout"><div class="stitch-call-flyout-heading"><span>✦ キーパッド</span><button type="button" data-action="close-call-panel" aria-label="閉じる">✕</button></div><div class="call-keypad-digits" id="callKeypadDigits">${safe(call.tones||'✧ · · · ✧')}</div><div class="call-keypad">${keys}</div></div>`;
+    }else if(call.phase==='connected'&&call.memoOpen){
+      flyout=`<form class="stitch-call-flyout" id="callMemoForm"><div class="stitch-call-flyout-heading"><span>✎ 通話メモ</span><button type="button" data-action="close-call-panel" aria-label="閉じる">✕</button></div><textarea name="memo" maxlength="300" aria-label="通話メモ" placeholder="メモを入力してね…">${safe(call.memo||'')}</textarea><button class="memo-save" type="submit">保存</button></form>`;
+    }
+    view.innerHTML=`<div class="stitch-call-stage" aria-label="${name} · ${status} · デモ通話画面"><div class="stitch-call-stars" aria-hidden="true"><span>✦</span><span>✧</span><span>✦</span><span>✧</span></div><div class="stitch-call-head">${statusMarkup}<strong class="caller-jp">${name}</strong><span class="caller-romaji">${roman}</span>${timeMarkup}</div><div class="stitch-call-center"><div class="stitch-call-emblem">${callHeartEmblem}</div></div><div class="stitch-call-bottom">${buttons}</div>${flyout}</div>`;
+  }
+  function renderPhone(){
+    if(state.call){renderCallStage();return;}
+    const selected=state.phoneMode==='dial';
+    const top=header('☎ 電話')+`<div class="mode-tabs"><button class="${selected?'':'selected'}" data-action="contacts-tab">♡ 連絡先</button><button class="${selected?'selected':''}" data-action="dial-tab">✦ キーパッド</button></div>`;
+    if(selected){
+      const keys=['1','2','3','4','5','6','7','8','9','*','0','#'].map(k=>`<button class="dial-key" data-action="digit" data-value="${k}">${k}</button>`).join('');
+      view.innerHTML=top+`<div class="dial-bg"><div class="dial-number">${safe(state.dial)||'✧ · · · ✧'}</div><div class="dial-grid">${keys}</div><div class="dial-actions"><button class="dial-delete" data-action="erase" aria-label="1文字削除">⌫</button><button class="dial-call" data-action="call-dial">☎ 発信する</button></div></div>`;
+    }else{
+      view.innerHTML=top+`<div class="dial-bg"><button class="call-showcase" data-action="incoming-random"><span>💗</span> 友だちから着信！ <span>✦</span></button><div class="app-scroll">${Object.entries(contacts).map(([id,c])=>`<div class="contact-call-row"><button class="contact-identity" data-action="incoming-call" data-id="${id}" aria-label="${safe(c.jp)}からの着信を見る"><span class="contact-label">${safe(c.jp)}</span></button><button class="call-choice incoming" data-action="incoming-call" data-id="${id}" aria-label="${safe(c.jp)}からの着信"><span>↙</span>着信</button><button class="call-choice outgoing" data-action="call-contact" data-id="${id}" aria-label="${safe(c.jp)}に電話をかける"><span>↗</span>発信</button></div>`).join('')}</div></div>`;
+    }
+  }
+  function duration(n){return `${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`;}
+  let connectionTimer=null;
+  function startCall(name,contact){
+    endCall(false);
+    state.call={name,contact,phase:'dialing',muted:false,speaker:false,keypadOpen:false,memoOpen:false,tones:'',memo:''};
+    state.callTime=0;
+    renderPhone();
+    connectionTimer=setTimeout(()=>{
+      if(!state.call || state.call.phase!=='dialing')return;
+      state.call.phase='connected';renderPhone();startCallClock();
+    },2200);
+  }
+  function incomingCall(id){
+    if(!contacts[id])return;
+    endCall(false);
+    state.call={name:contacts[id].name,contact:id,phase:'incoming',muted:false,speaker:false,keypadOpen:false,memoOpen:false,tones:'',memo:''};
+    state.callTime=0;
+    renderPhone();
+  }
+  function answerCall(){
+    if(!state.call || state.call.phase!=='incoming')return;
+    state.call.phase='connected';state.callTime=0;renderPhone();startCallClock();
+  }
+  function startCallClock(){
+    if(callTimer)clearInterval(callTimer);
+    callTimer=setInterval(()=>{if(!state.call||state.call.phase!=='connected')return;state.callTime++;const el=$('#callDuration');if(el)el.textContent=duration(state.callTime);},1000);
+  }
+  function endCall(repaint=true){
+    if(callTimer)clearInterval(callTimer);callTimer=null;
+    if(connectionTimer)clearTimeout(connectionTimer);connectionTimer=null;
+    state.call=null;state.callTime=0;
+    if(repaint)renderPhone();
+  }
+  function stopCamera(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}state.liveCamera=false;}
+  async function startCamera(){
+    if(!navigator.mediaDevices?.getUserMedia){flash('이 브라우저에서는 카메라를 열 수 없어요. 대신 데모 촬영을 해보세요!');return;}
+    stopCamera();
+    try{stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:state.facing}}});if(state.app!=='camera'||state.cameraMode!=='camera'){stopCamera();return;}state.liveCamera=true;renderCamera();const video=$('#cameraVideo');if(video){video.srcObject=stream;try{await video.play()}catch(e){}}flash('카메라가 연결되었어요! ✨');}
+    catch(e){state.liveCamera=false;renderCamera();flash('카메라 권한이 없어요. 데모 촬영이나 사진 불러오기를 사용하세요.');}
+  }
+  function renderCamera(){
+    if(state.cameraMode==='gallery'){
+      view.innerHTML=header('📸 사진 앨범')+`<div class="messages-bg"><div class="gallery-toolbar"><button class="pink-action" data-action="back-camera">◀ 카메라</button><span>반짝이는 사진 ${state.photos.length}장 ✨</span><button class="file-btn" data-action="clear-photos" ${state.photos.length?'':'disabled'}>전체 삭제</button></div><div class="app-scroll">${state.photos.length?`<div class="photo-grid">${state.photos.map((p,i)=>`<button class="photo-tile" data-action="view-photo" data-id="${p.id}"><img alt="촬영한 사진 ${i+1}" src="${p.src}"><small>${safe(p.time)}</small></button>`).join('')}</div>`:'<div class="gallery-blank">📷<br>아직 저장된 사진이 없어요.<br>사진을 찍어볼까요?</div>'}</div></div>`;
+    }else{
+      view.innerHTML=header('📷 카메라')+`<div class="camera-bg"><div class="camera-view">${state.liveCamera?'<video id="cameraVideo" autoplay muted playsinline aria-label="카메라 영상"></video>':'<div class="camera-placeholder"><div class="big">🌟</div><p>반짝이는 순간을 담아봐!<br>카메라 시작을 누르면 실제 촬영도 가능해요.</p></div>'}<span class="camera-overlay">✧ YUME CAMERA ✧</span></div><div class="camera-controls"><button data-action="start-camera"><span>${state.liveCamera?'🔄':'📹'}</span>${state.liveCamera?'전환':'카메라 시작'}</button><button class="shutter" data-action="shutter" aria-label="사진 찍기"></button><button data-action="gallery"><span>🖼️</span>앨범 (${state.photos.length})</button></div><div style="padding:5px 8px;background:#4d385a;text-align:center"><label class="file-btn" for="photoUpload">＋ 내 사진 불러오기</label><input id="photoUpload" type="file" accept="image/*" style="display:none" aria-label="사진 파일 선택"></div></div>`;
+      if(state.liveCamera&&stream){const video=$('#cameraVideo');if(video){video.srcObject=stream;video.play().catch(()=>{});}}
+    }
+    if(state.previewPhoto){view.insertAdjacentHTML('beforeend',`<div class="lightbox"><button data-action="close-photo">닫기 ✕</button><img alt="선택한 사진 크게 보기" src="${state.previewPhoto}"></div>`);}
+  }
+  function makeDemoPhoto(){
+    const c=document.createElement('canvas');c.width=640;c.height=640;const x=c.getContext('2d');const g=x.createLinearGradient(0,0,640,640);g.addColorStop(0,'#ffd5e9');g.addColorStop(.55,'#c3edff');g.addColorStop(1,'#ffe7a9');x.fillStyle=g;x.fillRect(0,0,640,640);
+    const drawStar=(cx,cy,outer,inner,points=5)=>{x.beginPath();for(let i=0;i<points*2;i++){let a=(Math.PI*i/points)-Math.PI/2,r=i%2?inner:outer;x.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);}x.closePath();x.fill();};
+    for(let i=0;i<32;i++){const xx=(i*179+36)%640,yy=(i*103+54)%640,rr=i%4+3;x.fillStyle='#fff8';x.beginPath();x.arc(xx,yy,rr,0,2*Math.PI);x.fill();}
+    x.save();x.shadowBlur=21;x.shadowColor='#fff';x.fillStyle='#ffce46';drawStar(330,276,145,66);x.fillStyle='#ffe8a0';drawStar(330,276,104,50);x.restore();
+    x.textAlign='center';x.font='bold 44px sans-serif';x.fillStyle='#f05ea7';x.fillText('YUME STAR PHONE',320,95);x.font='bold 30px sans-serif';x.fillText('✦ KIRAKIRA MOMENT ✦',320,510);x.font='25px sans-serif';x.fillStyle='#b266ab';x.fillText('I CAN SHINE!',320,554);
+    return c.toDataURL('image/jpeg',.77);
+  }
+  function addPhoto(src){state.photos.unshift({id:Date.now()+Math.random(),src,time:stamp()});state.photos=state.photos.slice(0,8);persist();flash('반짝이는 사진을 앨범에 저장했어요! ✨');}
+  function shutter(){const v=$('#cameraVideo');if(state.liveCamera&&v&&v.videoWidth){const c=document.createElement('canvas');const cap=800;const r=Math.min(cap/v.videoWidth,cap/v.videoHeight,1);c.width=Math.max(1,Math.round(v.videoWidth*r));c.height=Math.max(1,Math.round(v.videoHeight*r));c.getContext('2d').drawImage(v,0,0,c.width,c.height);addPhoto(c.toDataURL('image/jpeg',.75));}
+    else{addPhoto(makeDemoPhoto());}renderCamera();}
+  function loadFile(file){if(!file||!file.type.startsWith('image/')){flash('이미지 파일을 선택해주세요.');return;}const fr=new FileReader();fr.onload=()=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');const ratio=Math.min(900/img.width,900/img.height,1);c.width=Math.round(img.width*ratio);c.height=Math.round(img.height*ratio);c.getContext('2d').drawImage(img,0,0,c.width,c.height);addPhoto(c.toDataURL('image/jpeg',.7));renderCamera();};img.src=String(fr.result);};fr.readAsDataURL(file);}
+  function postAvatar(post){
+    if(post.who==='yume')return '<span class="avatar av-yume">🌈</span>';
+    if(contacts[post.who])return avatar(post.who);
+    const mark=safe(post.mark||'💫');
+    return `<span class="avatar" style="background:linear-gradient(135deg,#c8f0ff,#ffe0f1);color:#8d5f92">${mark}</span>`;
+  }
+  function postMeta(post){
+    const type=post.type||'fan';
+    const badge=post.badge||({idol:'아이돌',fan:'팬',official:'공식'}[type]||'팬');
+    const role = post.type==='official' ? '커뮤니티 공지' : (post.type==='idol' ? '아이돌 게시글' : '팬 커뮤니티 글');
+    const special = post.who==='yotsuboshi_official' ? '<span class="kira-official-chip">🏫 四星学園</span>' : '';
+    return `<div class="post-meta"><span class="post-badge ${safe(type)}">${safe(badge)}</span><span class="post-badge" style="background:#f7eef7;color:#9f7e99">${safe(role)}</span>${special}</div>`;
+  }
+  function renderKira(){
+    const filtered=state.kiraFilter==='all'?state.posts:state.posts.filter(p=>(p.type||'fan')===state.kiraFilter);
+    // In this Aikatsu-style fan feed, fan posts are shown with icon only.
+    // Idol and official account names remain visible.
+    const postItems=filtered.map(p=>`<article class="post"><div class="post-avatar-wrap">${postAvatar(p)}</div><div class="post-main"><div class="post-headline">${(p.type||'fan')==='fan'?'':`<strong>${safe(p.name)}</strong>`}<time>${safe(p.time)}</time></div>${postMeta(p)}<div class="post-bubble"><p class="post-text">${safe(p.text)}</p></div></div></article>`);
+    // A mail alert is an ephemeral overlay, never a persistent Kira feed post.
+    const posts=postItems.length?postItems.join(''):'<div class="kira-empty">이 카테고리의 첫 게시글을 남겨 보세요 ✨</div>';
+    const composeClass=state.kiraComposeOpen?'compose-box kira-compose-collapsed open':'compose-box kira-compose-collapsed';
+    const filt=(type,label)=>`<button data-action="kira-filter" data-filter="${type}" class="${state.kiraFilter===type?'active':''}">${label}</button>`;
+    view.innerHTML=`<div class="kira-bg stitch-kira">
+      <div class="kira-screen-head"><button class="kira-back-pill" data-app="home">◀ もどる</button><span class="kira-name-pill">✦ キラキライン ✦</span><button class="kira-compose-top" data-action="toggle-kira-compose" aria-label="글쓰기">✎</button></div>
+      <div class="kira-ref-filterbar">${filt('all','전체')}${filt('idol','🌟 아이돌')}${filt('fan','💗 팬')}${filt('official','🏫 四星学園 · 공식')}</div>
+      <div class="feed stitch-feed" id="kiraFeed">
+        <form id="postForm" class="${composeClass}"><div class="compose-head"><span class="avatar av-yume">🌈</span><div class="compose-tip">아이돌과 팬이 함께 쓰는 キラキライン</div></div><div class="compose-meta"><select name="authorType" aria-label="글 작성 계정"><option value="yume">니지노 유메 계정</option><option value="fan">팬 계정</option></select></div><textarea name="post" rows="2" maxlength="220" required placeholder="응원글이나 질문을 남겨 보세요 ✨"></textarea><div class="compose-actions"><div class="compose-tip">팬도 글을 올릴 수 있어요 💌</div><button type="submit">POST ✦</button></div></form>
+        ${posts}
+      </div>
+      <div class="kira-bottom-nav"><button data-app="camera" aria-label="카메라 열기"><span class="ico">${stitchCameraIcon}</span><span>カメラ</span></button><button data-app="messages" aria-label="개인 메시지 편지함 열기"><span class="ico">${stitchMailIcon}</span><span>メール</span></button><button data-action="kira-filter" data-filter="all" aria-label="커뮤니티 전체 보기" class="${state.kiraFilter==='all'?'active':''}"><span class="ico">${stitchQrIcon}</span><span>キラキライン</span></button></div>
+    </div>`;
+
+  }
+  function render(){if(state.app==='home')renderHome();if(state.app==='messages')renderMessages();if(state.app==='phone')renderPhone();if(state.app==='camera')renderCamera();if(state.app==='kira')renderKira();if(state.app!=='home'&&state.mailPopupSender){view.insertAdjacentHTML('beforeend',mailPopupMarkup(state.mailPopupSender,{overlay:true}));}}
+  function openThread(id){if(!contacts[id])return;if(state.app==='camera')stopCamera();clearMailPopup();state.app='messages';state.mailMode='detail';state.thread=id;state.mailIndex=lastIncomingIndex(id);const m=state.chats[id]?.[state.mailIndex];if(m&&m.by==='them'&&!m.read){m.read=true;persist();}renderMessages();}
+  function choiceWithoutRepeat(id){
+    const candidates=contacts[id].lines;
+    const recent=(state.chats[id]||[]).filter(m=>m.by==='them').slice(-3).map(m=>m.text);
+    const filtered=candidates.filter(text=>!recent.includes(text));
+    const choices=filtered.length?filtered:candidates;
+    return choices[Math.floor(Math.random()*choices.length)];
+  }
+  function receiveMessage(id=null,customText=null){
+    const sender=id&&contacts[id]?id:contactOrder[state.autoCursor++%contactOrder.length];
+    const text=customText||choiceWithoutRepeat(sender);
+    state.chats[sender]??=[];
+    state.chats[sender].push({by:'them',text,title:demoMailTitle(text),time:stamp(),ts:Date.now(),read:false});
+    // Keep local history short while preserving sent and most recent received letters.
+    if(state.chats[sender].length>100)state.chats[sender]=state.chats[sender].slice(-100);
+    persist();
+    showMailPopup(sender);
+  }
+  function contextualReply(id,originalText){
+    const text=originalText.toLowerCase();
+    const contains=(...terms)=>terms.some(t=>text.includes(t));
+    if(id==='rola'){
+      if(contains('라이브','무대','노래','연습'))return '좋아, 유메! 우리 둘이 함께라면 최강이잖아! 다음 라이브가 기대되는걸!';
+      if(contains('승부','대결','이기','져','지지'))return '좋아, 승부야! 다음엔 내가 절대 지지 않을 거니까!';
+    }
+    if(id==='koharu'){
+      if(contains('드레스','코디','옷','시착','베리'))return '응, 유메 쨩! 레인보우 베리 파르페의 드레스를 같이 입어보자 ♡';
+      if(contains('일정','시간','오늘','만나'))return '유메 쨩, 오늘 오후에는 괜찮아! 같이 만나면 정말 좋겠다 ♡';
+    }
+    if(id==='mahiru'){
+      if(contains('스타일','코디','옷','배우'))return '좋아, 유메. 스타일링은 기본부터 차근차근 알려줄게. 내 방으로 와줘.';
+      if(contains('머핀','간식','초코','먹'))return '응, 연습이 끝나면 같이 초코 머핀을 먹으러 가자. 기대하고 있을게.';
+    }
+    if(id==='ako'){
+      if(contains('연기','대사','연습'))return '연기 연습을 봐달라고요? 정말 어쩔 수 없군요! 사오토메 아코가 특별히 도와드릴게요!';
+      if(contains('일정','시간','오늘','만나'))return '마침 일정에 대해 이야기하려던 참이었어요. 지금 시간 있으신가요, 유메?';
+    }
+    const replies=contacts[id].replies;
+    return replies[Math.floor(Math.random()*replies.length)];
+  }
+  function replyLater(id,sentText){
+    const response=contextualReply(id,sentText);
+    setTimeout(()=>{if(!state.chats[id])return;receiveMessage(id,response);},2600+Math.floor(Math.random()*1100));
+  }
+  // On-page simulated mail arrivals; no messages are sent by a real service.
+  const automaticMail=()=>{if(!document.hidden)receiveMessage();};
+  setTimeout(automaticMail,16000);
+  setInterval(automaticMail,45000);
+  function updateTime(){$('#timeNow').textContent=stamp();}updateTime();setInterval(updateTime,30000);
+  document.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-app],[data-action]');if(!btn)return;
+    if(btn.dataset.app){navigate(btn.dataset.app);return;}
+    const act=btn.dataset.action,id=btn.dataset.id;
+    if(act==='open-thread'){openThread(id);return;}
+    if(act==='receive-message'){receiveMessage();return;}
+    if(act==='mail-inbox'){state.mailMode='inbox';renderMessages();return;}
+    if(act==='mail-folder'){state.mailFolder=btn.dataset.folder==='sent'?'sent':'received';state.mailMode='inbox';renderMessages();return;}
+    if(act==='mail-open'){showMail(id,Number(btn.dataset.index));return;}
+    if(act==='mail-delete'){
+      const list=state.chats[state.thread];
+      const item=list?.[state.mailIndex];
+      if(!item)return;
+      if(window.confirm('이 편지를 삭제할까요? (이 기기에서만 삭제됩니다)')){
+        list.splice(state.mailIndex,1);
+        state.mailFolder=item.by==='mine'?'sent':'received';
+        state.mailMode='inbox';
+        persist();renderMessages();flash('편지를 삭제했어요.');
+      }
+      return;
+    }
+    if(act==='mail-compose'){state.mailMode='compose';state.mailDraftTo=state.thread||'rola';state.mailDraftTitle='';renderMessages();return;}
+    if(act==='mail-reply'){state.mailMode='compose';state.mailDraftTo=state.thread||'rola';const oldMail=state.chats[state.mailDraftTo]?.[state.mailIndex];const oldTitle=oldMail?displayMailTitle(oldMail):'No title';state.mailDraftTitle=oldTitle==='No title'?'':(oldTitle.startsWith('Re: ')?oldTitle:'Re: '+oldTitle);renderMessages();return;}
+    if(act==='contacts-tab'){state.phoneMode='contacts';renderPhone();return;}
+    if(act==='dial-tab'){state.phoneMode='dial';renderPhone();return;}
+    if(act==='digit'){if(state.dial.length<18){state.dial+=btn.dataset.value;renderPhone();}return;}
+    if(act==='erase'){state.dial=state.dial.slice(0,-1);renderPhone();return;}
+    if(act==='call-dial'){if(!state.dial){flash('電話番号を入力してください。');return;}startCall(state.dial,null);return;}
+    if(act==='call-contact'){if(contacts[id])startCall(contacts[id].name,id);return;}
+    if(act==='incoming-call'){incomingCall(id);return;}
+    if(act==='incoming-random'){const who=contactOrder[Math.floor(Math.random()*contactOrder.length)];incomingCall(who);return;}
+    if(act==='accept-call'){answerCall();return;}
+    if(act==='reject-call'){endCall();flash('着信を拒否しました。');return;}
+    if(act==='hangup'){endCall();flash('通話を終了しました。');return;}
+    if(state.call && state.call.phase==='connected'){
+      if(act==='toggle-call-mute'){state.call.muted=!state.call.muted;renderPhone();return;}
+      if(act==='toggle-call-speaker'){state.call.speaker=!state.call.speaker;renderPhone();return;}
+      if(act==='toggle-call-keypad'){state.call.keypadOpen=!state.call.keypadOpen;state.call.memoOpen=false;renderPhone();return;}
+      if(act==='toggle-call-memo'){state.call.memoOpen=!state.call.memoOpen;state.call.keypadOpen=false;renderPhone();return;}
+      if(act==='close-call-panel'){state.call.keypadOpen=false;state.call.memoOpen=false;renderPhone();return;}
+      if(act==='call-keypress'){state.call.tones=(state.call.tones||'').slice(-15)+(btn.dataset.value||'');const el=$('#callKeypadDigits');if(el)el.textContent=state.call.tones;return;}
+    }
+    if(act==='start-camera'){if(state.liveCamera){state.facing=state.facing==='environment'?'user':'environment';}startCamera();return;}
+    if(act==='shutter'){shutter();return;}
+    if(act==='gallery'){stopCamera();state.cameraMode='gallery';renderCamera();return;}
+    if(act==='back-camera'){state.cameraMode='camera';renderCamera();return;}
+    if(act==='clear-photos'){if(state.photos.length&&window.confirm('앨범에 저장된 데모 사진을 모두 삭제할까요?')){state.photos=[];persist();renderCamera();}return;}
+    if(act==='view-photo'){const ph=state.photos.find(p=>String(p.id)===String(id));if(ph){state.previewPhoto=ph.src;renderCamera();}return;}
+    if(act==='close-photo'){state.previewPhoto=null;renderCamera();return;}
+    if(act==='kira-filter'){state.kiraFilter=btn.dataset.filter||'all';const scroll=$('#kiraFeed')?.scrollTop||0;renderKira();$('#kiraFeed').scrollTop=scroll;return;}
+    if(act==='toggle-kira-compose'){state.kiraComposeOpen=!state.kiraComposeOpen;renderKira();$('#kiraFeed').scrollTop=0;if(state.kiraComposeOpen)$('#postForm textarea')?.focus();return;}
+  });
+  document.addEventListener('submit',e=>{
+    if(e.target.id==='callMemoForm'){
+      e.preventDefault();
+      if(state.call && state.call.phase==='connected'){
+        state.call.memo=e.target.elements.memo.value;
+        state.call.memoOpen=false;
+        renderPhone();
+        flash('通話メモを保存しました。');
+      }
+      return;
+    }
+    if(e.target.id==='mailForm'){e.preventDefault();const id=e.target.elements.recipient.value,msg=e.target.elements.message.value.trim();const title=e.target.elements.title.value.trim()||'No title';if(!contacts[id]||!msg)return;state.chats[id]??=[];state.chats[id].push({by:'mine',title,text:msg,time:stamp(),ts:Date.now()});state.thread=id;state.mailMode='detail';state.mailIndex=state.chats[id].length-1;state.mailDraftTitle='';persist();renderMessages();flash(`${contacts[id].name}에게 메시지를 보냈어요! ✉`);replyLater(id,msg);return;}
+    if(e.target.id==='postForm'){
+      e.preventDefault();
+      const text=e.target.elements.post.value.trim();
+      if(!text)return;
+      const authorType=e.target.elements.authorType?.value||'yume';
+      const post=authorType==='fan'
+        ? {id:Date.now(),who:'fan_custom',name:'ファン',mark:'💫',type:'fan',badge:'팬',time:'방금 전',text,art:''}
+        : {id:Date.now(),who:'yume',name:'니지노 유메',mark:'🌈',type:'idol',badge:'아이돌',time:'방금 전',text,art:''};
+      state.posts.unshift(post);
+      state.kiraFilter='all';
+      state.kiraComposeOpen=false;
+      persist();
+      renderKira();
+      flash(authorType==='fan'?'팬 계정으로 새 글을 올렸어요! ✨':'유메 계정으로 새 글을 올렸어요! ✨');
+      return;
+    }
+  });
+  document.addEventListener('change',e=>{if(e.target.id==='photoUpload'&&e.target.files?.[0])loadFile(e.target.files[0]);});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.previewPhoto){state.previewPhoto=null;renderCamera();}});
+  render();
+})();
+</script>
+</body>
+</html>
